@@ -11,9 +11,7 @@ const HeaderLogo = props => {
   return (
     <Fragment>
       <div className={clsx('app-header-logo', {})}>
-        <Box
-          className="header-logo-wrapper"
-          title="Carolina React Admin Dashboard with Material-UI Free">
+        <Box className="header-logo-wrapper" title="VSoft">
           <Link to="/DashboardDefault" className="header-logo-wrapper-link">
             <IconButton
               color="primary"

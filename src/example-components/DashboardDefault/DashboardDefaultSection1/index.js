@@ -19,7 +19,7 @@ const initialElements = [
   {
     id: '1',
     type: 'input',
-    data: { label: 'input node' },
+    data: { label: 'Start' },
     position: { x: 250, y: 5 }
   }
 ];
