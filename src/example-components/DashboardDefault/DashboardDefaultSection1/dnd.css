@@ -28,6 +28,13 @@
     width: 80%;
     z-index: 10000;
   }
+  .dndnode1 {
+    border-right: 1px solid #eee;
+    padding: 50px 10px;
+    font-size: 12px;
+    background: #fcfcfc;
+    
+  }
   
   @media screen and (min-width: 768px) {
     .dndflow {

@@ -13,22 +13,41 @@ export default () => {
         'Backspace'.
       </div>
       <div
-        className="dndnode input"
-        onDragStart={event => onDragStart(event, 'input')}
+        className="dndnode1"
+        onDragStart={event => onDragStart(event, 'Unifier')}
+        //data: { label: Unifier}
         draggable>
-        Input Node
+        Unifier
       </div>
       <div
-        className="dndnode"
-        onDragStart={event => onDragStart(event, 'default')}
+        className="dndnode2"
+        onDragStart={event => onDragStart(event, 'P6')}
         draggable>
-        Default Node
+        P6
       </div>
       <div
-        className="dndnode output"
-        onDragStart={event => onDragStart(event, 'output')}
+        className="dndnode3"
+        onDragStart={event => onDragStart(event, 'SQL')}
         draggable>
-        Output Node
+        SQL
+      </div>
+      <div
+        className="dndnode4"
+        onDragStart={event => onDragStart(event, 'FTP')}
+        draggable>
+        FTP
+      </div>
+      <div
+        className="dndnode4"
+        onDragStart={event => onDragStart(event, 'CSV')}
+        draggable>
+        CSV
+      </div>
+      <div
+        className="dndnode4"
+        onDragStart={event => onDragStart(event, 'Email')}
+        draggable>
+        Email
       </div>
     </aside>
   );
