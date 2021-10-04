@@ -21,7 +21,6 @@ import Badges from './example-pages/Badges';
 import Icons from './example-pages/Icons';
 import UtilitiesHelpers from './example-pages/UtilitiesHelpers';
 import RegularTables1 from './example-pages/RegularTables1';
-import RegularTables4 from './example-pages/RegularTables4';
 import FormsControls from './example-pages/FormsControls';
 
 const DashboardDefault = lazy(() => import('./example-pages/DashboardDefault'));
@@ -98,7 +97,6 @@ const Routes = () => {
                 '/Popovers',
                 '/Tabs',
                 '/RegularTables1',
-                '/RegularTables4',
                 '/FormsControls',
                 '/ListGroups'
               ]}>
@@ -132,7 +130,6 @@ const Routes = () => {
                     <Route path="/Popovers" component={Popovers} />
                     <Route path="/Tabs" component={Tabs} />
                     <Route path="/RegularTables1" component={RegularTables1} />
-                    <Route path="/RegularTables4" component={RegularTables4} />
                     <Route path="/FormsControls" component={FormsControls} />
                     <Route path="/ListGroups" component={ListGroups} />
                   </motion.div>

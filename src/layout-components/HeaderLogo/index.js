@@ -12,7 +12,7 @@ const HeaderLogo = props => {
     <Fragment>
       <div className={clsx('app-header-logo', {})}>
         <Box className="header-logo-wrapper" title="VSoft">
-          <Link to="/DashboardDefault" className="header-logo-wrapper-link">
+          <Link to="/RegularTables1" className="header-logo-wrapper-link">
             <IconButton
               color="primary"
               size="medium"
