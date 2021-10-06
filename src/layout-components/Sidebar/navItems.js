@@ -1,6 +1,3 @@
-import BarChartIcon from '@material-ui/icons/BarChart';
-import CalendarTodayIcon from '@material-ui/icons/CalendarToday';
-import ChatIcon from '@material-ui/icons/ChatOutlined';
 import CodeIcon from '@material-ui/icons/Code';
 import DashboardIcon from '@material-ui/icons/DashboardOutlined';
 import ErrorIcon from '@material-ui/icons/ErrorOutline';
@@ -18,9 +15,6 @@ import SettingsIcon from '@material-ui/icons/SettingsOutlined';
 import ViewModuleIcon from '@material-ui/icons/ViewModule';
 
 var iconsMap = {
-  BarChartIcon: BarChartIcon,
-  CalendarTodayIcon: CalendarTodayIcon,
-  ChatIcon: ChatIcon,
   CodeIcon: CodeIcon,
   DashboardIcon: DashboardIcon,
   ErrorIcon: ErrorIcon,
@@ -74,11 +68,6 @@ export default [
         "to": "/NavigationMenus"
       },
       {
-        "label": "Progress Bars",
-        "description": "You can use the progress bars on their own or in combination with other widgets.",
-        "to": "/ProgressBars"
-      },
-      {
         "label": "Pagination",
         "description": "Basic and dynamic pagination for use in your next awesome application.",
         "to": "/Pagination"
@@ -106,17 +95,6 @@ export default [
     ]
   },
   {
-    "label": "Cards",
-    "icon": "ViewModuleIcon",
-    "content": [
-      {
-        "label": "Cards examples 3",
-        "description": "Wide selection of cards with multiple styles, borders, actions and hover effects.",
-        "to": "/Cards3"
-      }
-    ]
-  },
-  {
     "label": "Presentation Blocks",
     "icon": "ErrorIcon",
     "content": [
@@ -131,16 +109,6 @@ export default [
     "label": "Widgets",
     "icon": "ReceiptIcon",
     "content": [
-      {
-        "label": "Accordions",
-        "description": "Accordions represent collapsable component with extended functionality.",
-        "to": "/Accordions"
-      },
-      {
-        "label": "Modal dialogs",
-        "description": "Wide selection of modal dialogs styles and animations available.",
-        "to": "/Modals"
-      },
       {
         "label": "Notifications",
         "description": "Show beautiful, animated growl like notifications or alerts on your pages screens.",
@@ -189,16 +157,6 @@ export default [
     "label": "Others",
     "icon": "ChatIcon",
     "content": [
-      {
-        "label": "Apex Charts",
-        "description": "Wonderful animated charts built with ApexCharts components.",
-        "to": "/ApexCharts"
-      },
-      {
-        "label": "Maps",
-        "description": "Implement in your applications Google or vector maps.",
-        "to": "/Maps"
-      },
       {
         "label": "List Groups",
         "description": "These can be used with other components and elements to create stunning and unique new elements for your UIs.",
