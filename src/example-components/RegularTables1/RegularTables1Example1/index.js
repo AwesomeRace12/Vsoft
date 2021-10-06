@@ -2,6 +2,9 @@ import React, { Fragment, useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import data from './data.json';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
+
 //import { nanoid } from 'nanoid';
 
 import {
@@ -11,7 +14,8 @@ import {
   TableContainer,
   TableHead,
   TableRow,
-  Paper
+  Paper,
+  Button
 } from '@material-ui/core';
 
 export default function LivePreviewExample() {
@@ -79,6 +83,7 @@ export default function LivePreviewExample() {
               <TableCell>ID</TableCell>
               <TableCell align="right">Name</TableCell>
               <TableCell align="right">Description</TableCell>
+              <TableCell align="right">Actions</TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -89,6 +94,19 @@ export default function LivePreviewExample() {
                 </TableCell>
                 <TableCell align="right">{process.name}</TableCell>
                 <TableCell align="right">{process.description}</TableCell>
+                <TableCell align="right">
+                  <div>
+                    <Button
+                      to="/DefaultDashboard"
+                      component={Link}
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      title="Edit Process">
+                      <span className="btn-wrapper--label">Edit Process</span>
+                    </Button>
+                  </div>
+                </TableCell>
               </TableRow>
             ))}
           </TableBody>
