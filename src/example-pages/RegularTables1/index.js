@@ -8,10 +8,7 @@ import RegularTables1Example1 from '../../example-components/RegularTables1/Regu
 export default function RegularTables1() {
   return (
     <Fragment>
-      <PageTitle
-        titleHeading="Tables examples 1"
-        titleDescription="Tables are the backbone of almost all web applications."
-      />
+      <PageTitle titleHeading="Main Table" />
 
       <ExampleWrapperSimple sectionHeading="Basic">
         <RegularTables1Example1 />

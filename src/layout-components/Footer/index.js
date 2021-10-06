@@ -22,19 +22,10 @@ const Footer = props => {
                 className="rounded-sm text-nowrap"
                 button
                 component="a"
-                href="https://uifort.com/template/carolina-react-admin-dashboard-material-ui-free"
+                href="https://vsoft-usa.com"
                 target="_blank"
                 rel="noopener">
-                <ListItemText primary="Download now" />
-              </ListItem>
-              <ListItem
-                className="rounded-sm text-nowrap"
-                button
-                component="a"
-                href="https://uifort.com/template/carolina-react-admin-dashboard-material-ui-pro"
-                target="_blank"
-                rel="noopener">
-                <ListItemText primary="View PRO Version" />
+                <ListItemText primary="VSoft-USA" />
               </ListItem>
             </List>
           </div>
