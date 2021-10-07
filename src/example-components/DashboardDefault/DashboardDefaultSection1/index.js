@@ -15,7 +15,7 @@ import './dnd.css';
 
 //import Chart from 'react-apexcharts';
 
-const initialElements = [
+const Element1 = [
   {
     id: '1',
     type: 'input',
@@ -23,13 +23,60 @@ const initialElements = [
     position: { x: 250, y: 5 }
   }
 ];
+const Element2 = [
+  {
+    id: '2',
+    type: 'default',
+    data: { label: 'Unifier' },
+    position: { x: 250, y: 5 }
+  }
+  ,
+  {
+    id: '3',
+    type: 'default',
+    data: { label: 'P6' },
+    position: { x: 250, y: 5 }
+  }
+  ,
+  {
+    id: '4',
+    type: 'default',
+    data: { label: 'SQL' },
+    position: { x: 250, y: 5 }
+  }
+  ,
+  {
+    id: '5',
+    type: 'default',
+    data: { label: 'FTP' },
+    position: { x: 250, y: 5 }
+  }
+  ,
+  {
+    id: '6',
+    type: 'default',
+    data: { label: 'CSV' },
+    position: { x: 250, y: 5 }
+  }
+  ,
+  {
+    id: '7',
+    type: 'default',
+    data: { label: 'Email' },
+    position: { x: 250, y: 5 }
+  }
+
+];
+
+
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 export default function LivePreviewExample() {
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
-  const [elements, setElements] = useState(initialElements);
+  const [elements, setElements] = useState(Element1);
+  const [element2, setElement2] = useState(Element2);
   const onConnect = params => setElements(els => addEdge(params, els));
   const onElementsRemove = elementsToRemove =>
     setElements(els => removeElements(elementsToRemove, els));
