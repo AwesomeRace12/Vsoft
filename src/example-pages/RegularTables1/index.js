@@ -9,8 +9,7 @@ export default function RegularTables1() {
   return (
     <Fragment>
       <PageTitle titleHeading="Main Table" />
-
-      <ExampleWrapperSimple sectionHeading="Basic">
+      <ExampleWrapperSimple>
         <RegularTables1Example1 />
       </ExampleWrapperSimple>
     </Fragment>

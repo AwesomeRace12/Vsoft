@@ -29,46 +29,38 @@ const Element2 = [
     type: 'default',
     data: { label: 'Unifier' },
     position: { x: 250, y: 5 }
-  }
-  ,
+  },
   {
     id: '3',
     type: 'default',
     data: { label: 'P6' },
     position: { x: 250, y: 5 }
-  }
-  ,
+  },
   {
     id: '4',
     type: 'default',
     data: { label: 'SQL' },
     position: { x: 250, y: 5 }
-  }
-  ,
+  },
   {
     id: '5',
     type: 'default',
     data: { label: 'FTP' },
     position: { x: 250, y: 5 }
-  }
-  ,
+  },
   {
     id: '6',
     type: 'default',
     data: { label: 'CSV' },
     position: { x: 250, y: 5 }
-  }
-  ,
+  },
   {
     id: '7',
     type: 'default',
     data: { label: 'Email' },
     position: { x: 250, y: 5 }
   }
-
 ];
-
-
 
 let id = 0;
 const getId = () => `dndnode_${id++}`;
