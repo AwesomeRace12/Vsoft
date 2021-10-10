@@ -2,9 +2,8 @@ import React, { Fragment, useState } from 'react';
 import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 import data from './data.json';
-import history from './../../../history';
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-//import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { Link } from 'react-router-dom';
 
 //import { nanoid } from 'nanoid';
 
@@ -53,13 +52,7 @@ export default function LivePreviewExample() {
 
   return (
     <Fragment>
-      <Popup
-        trigger={
-          <Button size="small" color="primary" variant="contained">
-            New
-          </Button>
-        }
-        position="right center">
+      <Popup trigger={<button>New</button>} position="right center">
         <form onSubmit={handleAddFormSubmit}>
           <input
             type="text"
@@ -80,13 +73,7 @@ export default function LivePreviewExample() {
             placeholder="Enter a description"
             onChange={handleAddFormChange}
           />
-          <Button
-            type="submit"
-            size="small"
-            color="primary"
-            variant="contained">
-            Add
-          </Button>
+          <button type="submit">Add</button>
         </form>
       </Popup>
       <TableContainer className="mb-4" component={Paper}>
@@ -110,7 +97,8 @@ export default function LivePreviewExample() {
                 <TableCell align="right">
                   <div>
                     <Button
-                      onClick={() => history.push('/DashboardDefault')}
+                      to="/DefaultDashboard"
+                      component={Link}
                       size="small"
                       color="primary"
                       variant="contained"
