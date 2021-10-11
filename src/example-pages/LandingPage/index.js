@@ -4,7 +4,7 @@ import { Grid, Container, Button, Tooltip } from '@material-ui/core';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
-
+import './landing.css';
 import hero9 from '../../assets/images/hero-bg/hero-1.jpg';
 
 const LandingPage = () => {
@@ -40,26 +40,44 @@ const LandingPage = () => {
                         processes for data extraction, transformation,
                         validation, and processing.
                       </p>
-                      <p className="text-white font-size-lg">
-                        Curious about the features? We&#39;ve set up a live
-                        preview for your viewing pleasure.
-                      </p>
-                      <div className="divider border-2 border-light my-5 border-light opacity-2 mx-auto rounded-circle w-50" />
-                      <div>
-                        <Button
-                          to="/RegularTables1"
-                          component={Link}
-                          size="large"
-                          color="primary"
-                          variant="contained"
-                          className="m-2 py-3 px-5"
-                          title="View iProcess Workflow Creator">
-                          <span className="btn-wrapper--label">iProcess</span>
-                          <span className="btn-wrapper--icon">
-                            <FontAwesomeIcon icon={['fas', 'arrow-right']} />
-                          </span>
-                        </Button>
-                      </div>
+                      <form
+                        className="modal-content animate"
+                        action="/action_page.php"
+                        method="post">
+                        <div className="container">
+                          <label htmlFor="uname">
+                            <b>Username</b>
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Enter Username"
+                            name="uname"
+                            required
+                          />
+                          <label htmlFor="psw">
+                            <b>Password</b>
+                          </label>
+                          <input
+                            type="password"
+                            placeholder="Enter Password"
+                            name="psw"
+                            required
+                          />
+                          <Button
+                            to="/RegularTables1"
+                            component={Link}
+                            size="large"
+                            color="primary"
+                            variant="contained"
+                            className="m-2 py-3 px-5"
+                            title="View iProcess Workflow Creator">
+                            <span className="btn-wrapper--label">Log in</span>
+                            <span className="btn-wrapper--icon">
+                              <FontAwesomeIcon icon={['fas', 'arrow-right']} />
+                            </span>
+                          </Button>
+                        </div>
+                      </form>
                     </div>
                   </div>
                 </Grid>

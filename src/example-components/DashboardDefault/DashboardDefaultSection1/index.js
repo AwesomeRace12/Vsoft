@@ -6,12 +6,13 @@ import ReactFlow, {
   Controls
 } from 'react-flow-renderer';
 
-//import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useHistory } from 'react-router-dom';
 import { Grid, Card, CardContent } from '@material-ui/core';
 import Sidebar from './Sidebar';
 
 import './dnd.css';
+import { Button } from '@material-ui/core';
 
 //import Chart from 'react-apexcharts';
 
@@ -65,6 +66,7 @@ const Element2 = [
 let id = 0;
 const getId = () => `dndnode_${id++}`;
 export default function LivePreviewExample() {
+  const history = useHistory();
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(Element1);
@@ -98,8 +100,25 @@ export default function LivePreviewExample() {
 
     setElements(es => es.concat(newNode));
   };
+
+  const doCancel = () => {
+    history.goBack();
+  };
+
   return (
     <Fragment>
+      <Button
+        onClick={doCancel}
+        type="default"
+        size="small"
+        color="primary"
+        style={{ float: 'right' }}
+        variant="contained">
+        <span className="btn-wrapper--icon">
+          <FontAwesomeIcon icon={['fas', 'arrow-left']} />
+        </span>
+        Cancel
+      </Button>
       <Grid container spacing={4}>
         <Grid item xs={12} lg={12}>
           <Card className="card-box mb-4">

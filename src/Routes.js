@@ -1,11 +1,11 @@
 import React, { lazy, Suspense } from 'react';
-import { Switch, Route, Redirect, useLocation, Router } from 'react-router-dom';
+import { Switch, Route, Redirect, useLocation } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 
 import { ThemeProvider } from '@material-ui/styles';
 
 import MuiTheme from './theme';
-import history from './history';
+//import history from './history';
 
 // Layout Blueprints
 
@@ -61,88 +61,82 @@ const Routes = () => {
         <Suspense
           fallback={
             <div className="d-flex align-items-center vh-100 justify-content-center text-center font-weight-bold font-size-lg py-3">
-              <div className="w-50 mx-auto">
-                Please wait while we load the live preview examples
-              </div>
+              <div className="w-50 mx-auto">Loading...</div>
             </div>
           }>
-          <Router history={history}>
-            <Switch>
-              <Redirect exact from="/" to="/LandingPage" />
-              <Route path={['/LandingPage']}>
-                <PresentationLayout>
-                  <Switch location={location} key={location.pathname}>
-                    <motion.div
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                      variants={pageVariants}
-                      transition={pageTransition}>
-                      <Route path="/LandingPage" component={LandingPage} />
-                    </motion.div>
-                  </Switch>
-                </PresentationLayout>
-              </Route>
+          <Switch>
+            <Redirect exact from="/" to="/LandingPage" />
+            <Route path={['/LandingPage']}>
+              <PresentationLayout>
+                <Switch location={location} key={location.pathname}>
+                  <motion.div
+                    initial="initial"
+                    animate="in"
+                    exit="out"
+                    variants={pageVariants}
+                    transition={pageTransition}>
+                    <Route path="/LandingPage" component={LandingPage} />
+                  </motion.div>
+                </Switch>
+              </PresentationLayout>
+            </Route>
 
-              <Route
-                path={[
-                  '/DashboardDefault',
-                  '/Buttons',
-                  '/Dropdowns',
-                  '/NavigationMenus',
-                  '/Pagination',
-                  '/Scrollable',
-                  '/Badges',
-                  '/Icons',
-                  '/UtilitiesHelpers',
-                  '/Notifications',
-                  '/Popovers',
-                  '/Tabs',
-                  '/RegularTables1',
-                  '/FormsControls',
-                  '/ListGroups'
-                ]}>
-                <LeftSidebar>
-                  <Switch location={location} key={location.pathname}>
-                    <motion.div
-                      initial="initial"
-                      animate="in"
-                      exit="out"
-                      variants={pageVariants}
-                      transition={pageTransition}>
-                      <Route
-                        path="/DashboardDefault"
-                        component={DashboardDefault}
-                      />
-                      <Route path="/Buttons" component={Buttons} />
-                      <Route path="/Dropdowns" component={Dropdowns} />
-                      <Route
-                        path="/NavigationMenus"
-                        component={NavigationMenus}
-                      />
-                      <Route path="/Pagination" component={Pagination} />
-                      <Route path="/Scrollable" component={Scrollable} />
-                      <Route path="/Badges" component={Badges} />
-                      <Route path="/Icons" component={Icons} />
-                      <Route
-                        path="/UtilitiesHelpers"
-                        component={UtilitiesHelpers}
-                      />
-                      <Route path="/Notifications" component={Notifications} />
-                      <Route path="/Popovers" component={Popovers} />
-                      <Route path="/Tabs" component={Tabs} />
-                      <Route
-                        path="/RegularTables1"
-                        component={RegularTables1}
-                      />
-                      <Route path="/FormsControls" component={FormsControls} />
-                      <Route path="/ListGroups" component={ListGroups} />
-                    </motion.div>
-                  </Switch>
-                </LeftSidebar>
-              </Route>
-            </Switch>
-          </Router>
+            <Route
+              path={[
+                '/DashboardDefault',
+                '/Buttons',
+                '/Dropdowns',
+                '/NavigationMenus',
+                '/Pagination',
+                '/Scrollable',
+                '/Badges',
+                '/Icons',
+                '/UtilitiesHelpers',
+                '/Notifications',
+                '/Popovers',
+                '/Tabs',
+                '/RegularTables1',
+                '/FormsControls',
+                '/ListGroups',
+                '/Form'
+              ]}>
+              <LeftSidebar>
+                <Switch location={location} key={location.pathname}>
+                  <motion.div
+                    initial="initial"
+                    animate="in"
+                    exit="out"
+                    variants={pageVariants}
+                    transition={pageTransition}>
+                    <Route
+                      path="/DashboardDefault"
+                      component={DashboardDefault}
+                    />
+                    <Route path="/Buttons" component={Buttons} />
+                    <Route path="/Dropdowns" component={Dropdowns} />
+                    <Route
+                      path="/NavigationMenus"
+                      component={NavigationMenus}
+                    />
+                    <Route path="/Pagination" component={Pagination} />
+                    <Route path="/Scrollable" component={Scrollable} />
+                    <Route path="/Badges" component={Badges} />
+                    <Route path="/Icons" component={Icons} />
+                    <Route
+                      path="/UtilitiesHelpers"
+                      component={UtilitiesHelpers}
+                    />
+                    <Route path="/Notifications" component={Notifications} />
+                    <Route path="/Popovers" component={Popovers} />
+                    <Route path="/Tabs" component={Tabs} />
+                    <Route path="/RegularTables1" component={RegularTables1} />
+                    <Route path="/FormsControls" component={FormsControls} />
+                    <Route path="/ListGroups" component={ListGroups} />
+                  </motion.div>
+                </Switch>
+              </LeftSidebar>
+            </Route>
+          </Switch>
         </Suspense>
       </AnimatePresence>
     </ThemeProvider>
