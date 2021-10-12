@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from 'framer-motion';
 import { ThemeProvider } from '@material-ui/styles';
 
 import MuiTheme from './theme';
+//import history from './history';
 
 // Layout Blueprints
 
@@ -60,9 +61,7 @@ const Routes = () => {
         <Suspense
           fallback={
             <div className="d-flex align-items-center vh-100 justify-content-center text-center font-weight-bold font-size-lg py-3">
-              <div className="w-50 mx-auto">
-                Please wait while we load the live preview examples
-              </div>
+              <div className="w-50 mx-auto">Loading...</div>
             </div>
           }>
           <Switch>
