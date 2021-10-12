@@ -7,22 +7,13 @@ import { connect } from 'react-redux';
 import { Header, Footer } from '../../layout-components';
 
 const LeftSidebar = props => {
-  const {
-    children,
-    sidebarToggle,
-    sidebarFixed,
-    footerFixed,
-    contentBackground
-  } = props;
+  const { children, footerFixed, contentBackground } = props;
 
   return (
     <Fragment>
       <div className={clsx('app-wrapper', contentBackground)}>
         <Header />
-        <div
-          className={clsx('app-main', {
-            'app-main-sidebar-static': !sidebarFixed
-          })}>
+        <div className={clsx('app-main', {})}>
           <div
             className={clsx('app-content', {
               'app-content-footer-fixed': footerFixed
