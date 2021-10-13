@@ -13,6 +13,11 @@ export default () => {
         'Backspace'.
       </div>
       <div
+        className="diamond"
+        onDragStart={event => onDragStart(event, '')}
+        draggable>
+      </div>
+      <div
         className="dndnode1"
         onDragStart={event => onDragStart(event, 'Unifier')}
         //data: { label: Unifier}
