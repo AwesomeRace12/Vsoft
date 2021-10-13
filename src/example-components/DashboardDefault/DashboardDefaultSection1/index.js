@@ -22,41 +22,47 @@ const Element1 = [
     type: 'input',
     data: { label: 'Start' },
     position: { x: 250, y: 5 }
+  },
+  {
+    id: '2',
+    type: 'output',
+    data: { label: 'End' },
+    position: { x: 500, y: 10 }
   }
 ];
 const Element2 = [
   {
-    id: '2',
+    id: '3',
     type: 'default',
     data: { label: 'Unifier' },
     position: { x: 250, y: 5 }
   },
   {
-    id: '3',
+    id: '4',
     type: 'default',
     data: { label: 'P6' },
     position: { x: 250, y: 5 }
   },
   {
-    id: '4',
+    id: '5',
     type: 'default',
     data: { label: 'SQL' },
     position: { x: 250, y: 5 }
   },
   {
-    id: '5',
+    id: '6',
     type: 'default',
     data: { label: 'FTP' },
     position: { x: 250, y: 5 }
   },
   {
-    id: '6',
+    id: '7',
     type: 'default',
     data: { label: 'CSV' },
     position: { x: 250, y: 5 }
   },
   {
-    id: '7',
+    id: '8',
     type: 'default',
     data: { label: 'Email' },
     position: { x: 250, y: 5 }

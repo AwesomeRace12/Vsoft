@@ -2,6 +2,7 @@ import React, { Fragment } from 'react';
 
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
   Hidden,
@@ -20,19 +21,11 @@ import projectLogo from '../../assets/images/react.svg';
 import HeaderLogo from '../../layout-components/HeaderLogo';
 //import HeaderUserbox from '../../layout-components/HeaderUserbox';
 
-import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
-import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+//import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
+//import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 
 const Header = props => {
-  const toggleSidebarMobile = () => {
-    setSidebarToggleMobile(!sidebarToggleMobile);
-  };
-  const {
-    headerShadow,
-    headerFixed,
-    sidebarToggleMobile,
-    setSidebarToggleMobile
-  } = props;
+  const { headerShadow, headerFixed } = props;
 
   return (
     <Fragment>
@@ -78,20 +71,15 @@ const Header = props => {
             </Box>
           </Hidden>
           <Box className="d-flex align-items-center">
-            <Box className="toggle-sidebar-btn-mobile">
-              <Tooltip title="Toggle Sidebar" placement="right">
-                <IconButton
-                  color="inherit"
-                  onClick={toggleSidebarMobile}
-                  size="medium">
-                  {sidebarToggleMobile ? (
-                    <MenuOpenRoundedIcon />
-                  ) : (
-                    <MenuRoundedIcon />
-                  )}
-                </IconButton>
-              </Tooltip>
-            </Box>
+            <Button
+              size="small"
+              className="m-2 btn text-success"
+              style={{ float: 'right' }}>
+              <span className="btn-wrapper--icon">
+                <FontAwesomeIcon icon={['fas', 'plus']} />
+              </span>
+              New
+            </Button>
           </Box>
         </Box>
       </AppBar>

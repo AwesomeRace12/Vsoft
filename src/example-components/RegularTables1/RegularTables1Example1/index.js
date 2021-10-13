@@ -4,7 +4,7 @@ import 'reactjs-popup/dist/index.css';
 //import history from './../../../history';
 //import { Router, Route, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
-import nextId from 'react-id-generator';
+import nextId, { setPrefix } from 'react-id-generator';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { Link } from 'react-router-dom';
@@ -23,6 +23,7 @@ import {
 } from '@material-ui/core';
 
 const data = [];
+setPrefix('');
 export default function LivePreviewExample() {
   const history = useHistory();
   const [processes, setProcesses] = useState(data);

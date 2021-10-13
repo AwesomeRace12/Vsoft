@@ -6,10 +6,10 @@
   }
   
   .dndflow aside {
-    border-right: 1px solid #eee;
+    border-right: 1px solid rgb(255, 255, 255);
     padding: 150px 10px;
     font-size: 12px;
-    background: #fcfcfc;
+    background: #4f67f0;
     
   }
   
@@ -29,10 +29,17 @@
     z-index: 10000;
   }
   .dndnode1 {
-    border-right: 1px solid #eee;
-    padding: 50px 10px;
+    color:rgb(255, 255, 255);
+    padding: 20px 10px;
     font-size: 12px;
-    background: #fcfcfc;
+    background: #a11a1a;
+    
+  }
+  .dndnode2 {
+    
+    padding: 20px 10px;
+    font-size: 12px;
+    background: #fd5a5a;
     
   }
   
