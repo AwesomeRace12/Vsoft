@@ -14,7 +14,7 @@ export default () => {
       </div>
       <div
         className="diamond"
-        onDragStart={event => onDragStart(event, '')}
+        onDragStart={event => onDragStart(event, 'diamond')}
         draggable>
       </div>
       <div

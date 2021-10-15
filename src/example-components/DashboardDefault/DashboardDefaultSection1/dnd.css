@@ -30,9 +30,9 @@
   }
   
   .diamond {
-    width: 120px;
-    height: 120px;
-    background: #0d3b07;
+    width: 100px;
+    height: 100px;
+    background: #49c011;
 /* Rotate */
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
@@ -45,7 +45,7 @@
     -ms-transform-origin: 0 100%;
     -o-transform-origin: 0 100%;
     transform-origin: 0 100%;
-    margin: 60px 0 10px 310px;
+    margin: 60px 0 10px 85px;
     
   }
   .dndnode1 {

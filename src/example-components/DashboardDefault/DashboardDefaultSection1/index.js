@@ -66,10 +66,17 @@ const Element2 = [
     type: 'default',
     data: { label: 'Email' },
     position: { x: 250, y: 5 }
+  },
+  {
+  id: '9',
+  type: 'default',
+  data: { label: 'diamond' },
+  position: { x: 250, y: 5 },
   }
+  
 ];
 
-let id = 0;
+let id = 1;
 const getId = () => `dndnode_${id++}`;
 export default function LivePreviewExample() {
   const history = useHistory();
@@ -124,6 +131,9 @@ export default function LivePreviewExample() {
           <FontAwesomeIcon icon={['fas', 'arrow-left']} />
         </span>
         Cancel
+      </Button>
+      <Button>
+
       </Button>
       <Grid container spacing={4}>
         <Grid item xs={12} lg={12}>
