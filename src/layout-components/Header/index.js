@@ -4,14 +4,7 @@ import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import {
-  Hidden,
-  IconButton,
-  AppBar,
-  Box,
-  Button,
-  Tooltip
-} from '@material-ui/core';
+import { Hidden, IconButton, AppBar, Box, Button } from '@material-ui/core';
 
 import { connect } from 'react-redux';
 
