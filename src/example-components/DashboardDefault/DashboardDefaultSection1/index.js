@@ -115,7 +115,9 @@ export default function LivePreviewExample() {
   };
 
   const doCancel = () => {
-    history.goBack();
+    history.push('/RegularTables1', {
+      from: 'LivePreviewExample'
+    });
   };
 
   return (

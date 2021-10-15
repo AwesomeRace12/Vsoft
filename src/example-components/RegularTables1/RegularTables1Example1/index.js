@@ -5,27 +5,143 @@ import 'reactjs-popup/dist/index.css';
 //import { Router, Route, Link } from 'react-router-dom';
 import { useHistory } from 'react-router-dom';
 import nextId, { setPrefix } from 'react-id-generator';
-
+import { useTable } from 'react-table';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
 //import { nanoid } from 'nanoid';
 
 import {
   TableBody,
-  Table,
   TableCell,
   TableContainer,
   TableHead,
   TableRow,
   Paper,
-  Button
+  Button,
+  Table
 } from '@material-ui/core';
+const Styles = styled.div`
+  table {
+    border-spacing: 0;
+    border: 1px solid white;
+    tr:nth-child(odd) {
+      background-color: #abb4c7;
 
-const data = [];
-setPrefix('');
+      color: #fff;
+    }
+    tr {
+      :last-child {
+        td {
+          border-bottom: 0;
+        }
+      }
+    }
+
+    th,
+    td {
+      padding: 0.5rem;
+      border-bottom: 1px solid white;
+      border-right: 1px solid white;
+
+      :last-child {
+        border-right: 0;
+      }
+    }
+
+    th {
+      background: #0b9e86;
+      border-bottom: 3px solid white;
+      color: white;
+      fontweight: bold;
+    }
+  }
+`;
+function Table1({ columns, data }) {
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    rows,
+    prepareRow
+  } = useTable({
+    columns,
+    data
+  });
+  return (
+    <TableContainer className="mb-4" component={Paper}>
+      <Table striped {...getTableProps()} aria-label="simple table">
+        <TableHead>
+          {headerGroups.map(headerGroup => (
+            <tr {...headerGroup.getHeaderGroupProps()}>
+              {headerGroup.headers.map(column => (
+                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+              ))}
+            </tr>
+          ))}
+        </TableHead>
+        <TableBody {...getTableBodyProps()}>
+          {rows.map(row => {
+            prepareRow(row);
+            return (
+              <TableRow {...row.getRowProps()}>
+                {row.cells.map(cell => {
+                  return (
+                    <TableCell {...cell.getCellProps()}>
+                      {cell.render('Cell')}
+                    </TableCell>
+                  );
+                })}
+              </TableRow>
+            );
+          })}
+        </TableBody>
+      </Table>
+    </TableContainer>
+  );
+}
+
+//setPrefix('');
 export default function LivePreviewExample() {
-  const history = useHistory();
+  const data = React.useMemo(
+    () => [
+      {
+        ID: '1',
+        name: 'E-1',
+        description: 'SAP'
+      },
+      {
+        ID: '2',
+        name: 'E-2',
+        description: 'SAP'
+      },
+      {
+        ID: '3',
+        name: 'E-3',
+        description: 'SAP'
+      }
+    ],
+    []
+  );
+  const columns = React.useMemo(
+    () => [
+      {
+        Header: 'ID',
+        accessor: 'ID'
+      },
+      {
+        Header: 'Name',
+        accessor: 'name'
+      },
+      {
+        Header: 'Description',
+        accessor: 'description'
+      }
+    ],
+    []
+  );
+  /*const history = useHistory();
   const [processes, setProcesses] = useState(data);
   const [showForm, setShowForm] = useState(false);
   const [addFormData, setAddFormData] = useState({
@@ -63,102 +179,12 @@ export default function LivePreviewExample() {
   };
   const doCancel = () => {
     setShowForm(!showForm);
-  };
+  };*/
   return (
     <Fragment>
-      <div>
-        <Button
-          size="small"
-          className="m-2 btn text-success"
-          style={{ float: 'right' }}
-          onClick={showForm1}>
-          <span className="btn-wrapper--icon">
-            <FontAwesomeIcon icon={['fas', 'plus']} />
-          </span>
-          New
-        </Button>
-        {showForm ? (
-          <form onSubmit={handleAddFormSubmit}>
-            <input
-              type="text"
-              name="name"
-              placeholder="Enter a name"
-              onChange={handleAddFormChange}
-            />
-            <br />
-            <textarea
-              rows="10"
-              cols="50"
-              name="description"
-              placeholder="Enter a description"
-              onChange={handleAddFormChange}
-            />
-            <br />
-            <Button
-              onClick={() =>
-                history.push('/DashboardDefault', {
-                  from: 'LivePreviewExample'
-                })
-              }
-              type="submit"
-              size="small"
-              color="primary"
-              variant="contained">
-              Create
-            </Button>
-            <Button
-              onClick={doCancel}
-              type="submit"
-              size="small"
-              color="primary"
-              variant="contained">
-              Cancel
-            </Button>
-          </form>
-        ) : (
-          <TableContainer className="mb-4" component={Paper}>
-            <Table aria-label="simple table">
-              <TableHead>
-                <TableRow>
-                  <TableCell>ID</TableCell>
-                  <TableCell align="right">Name</TableCell>
-                  <TableCell align="right">Description</TableCell>
-                  <TableCell align="right">Actions</TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>
-                {processes.map(process => (
-                  <TableRow>
-                    <TableCell component="th" scope="row">
-                      {process.ID}
-                    </TableCell>
-                    <TableCell align="right">{process.name}</TableCell>
-                    <TableCell align="right">{process.description}</TableCell>
-                    <TableCell align="right">
-                      <div>
-                        <Button
-                          onClick={() =>
-                            history.push('/DashboardDefault', {
-                              from: 'LivePreviewExample'
-                            })
-                          }
-                          size="small"
-                          color="primary"
-                          variant="contained"
-                          title="Edit Process">
-                          <span className="btn-wrapper--label">
-                            Edit Process
-                          </span>
-                        </Button>
-                      </div>
-                    </TableCell>
-                  </TableRow>
-                ))}
-              </TableBody>
-            </Table>
-          </TableContainer>
-        )}
-      </div>
+      <Styles>
+        <Table1 columns={columns} data={data} />
+      </Styles>
     </Fragment>
   );
 }
