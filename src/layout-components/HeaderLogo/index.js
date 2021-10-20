@@ -23,7 +23,7 @@ const HeaderLogo = props => {
           </IconButton>
         </Link>
         <Box className="header-logo-text">
-          <span style={{ color: '#ff0000', fontSize: 'x-large'}}>iProcess</span>
+          <span style={{ color: '#ff0000', fontSize: '175%'}}>iProcess</span>
         </Box>
       </Box>
     </Fragment>
