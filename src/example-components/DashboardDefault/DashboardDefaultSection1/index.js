@@ -29,13 +29,13 @@ const Element1 = [
     data: { label: 'End' },
     position: { x: 500, y: 10 }
   }
-];
+]
 const Element2 = [
-  {
+   {
     id: '3',
     type: 'default',
     data: { label: 'Unifier' },
-    position: { x: 250, y: 5 }
+    
   },
   {
     id: '4',
@@ -112,6 +112,7 @@ export default function LivePreviewExample() {
     };
 
     setElements(es => es.concat(newNode));
+    setElement2(es => es.concat(newNode));
   };
 
   const doCancel = () => {
@@ -146,6 +147,7 @@ export default function LivePreviewExample() {
                   <div className="reactflow-wrapper" ref={reactFlowWrapper}>
                     <ReactFlow
                       elements={elements}
+                      element2={element2}
                       onConnect={onConnect}
                       onElementsRemove={onElementsRemove}
                       onLoad={onLoad}
