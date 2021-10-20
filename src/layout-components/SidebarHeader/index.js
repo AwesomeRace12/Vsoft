@@ -29,7 +29,7 @@ const SidebarHeader = props => {
           title="Carolina React Admin Dashboard with Material-UI Free">
           <Link to="/DashboardDefault" className="header-logo-wrapper-link">
             <IconButton
-              color="primary"
+              color="secondary"
               size="medium"
               className="header-logo-wrapper-btn">
               <img
