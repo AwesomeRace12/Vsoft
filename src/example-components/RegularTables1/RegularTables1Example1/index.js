@@ -1,14 +1,12 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 //import Popup from 'reactjs-popup';
 import 'reactjs-popup/dist/index.css';
 //import history from './../../../history';
 //import { Router, Route, Link } from 'react-router-dom';
-import { useHistory } from 'react-router-dom';
-import nextId, { setPrefix } from 'react-id-generator';
 import { useTable } from 'react-table';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 //import { Link } from 'react-router-dom';
 import styled from 'styled-components';
+import axios from 'axios';
 
 //import { nanoid } from 'nanoid';
 
@@ -19,7 +17,6 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Button,
   Table
 } from '@material-ui/core';
 const Styles = styled.div`
@@ -58,6 +55,7 @@ const Styles = styled.div`
     }
   }
 `;
+
 function Table1({ columns, data }) {
   const {
     getTableProps,
@@ -104,26 +102,45 @@ function Table1({ columns, data }) {
 
 //setPrefix('');
 export default function LivePreviewExample() {
-  const data = React.useMemo(
+  const [loadingData, setLoadingData] = useState(true);
+  const [data, setData] = useState([]);
+  const url = 'http://localhost:8080/processData/processList';
+
+  useEffect(() => {
+    async function getData() {
+      await axios.get('http://localhost:8080/processData').then(response => {
+        console.log(response.data);
+        setData(response.data);
+        setLoadingData(false);
+      });
+    }
+    if (loadingData) {
+      getData();
+    }
+  }, [loadingData]);
+  /*const data = React.useMemo(
     () => [
       {
         ID: '1',
         name: 'E-1',
-        description: 'SAP'
+        description: 'SAP',
+        status: 'active'
       },
       {
-        ID: '2',
+        ID: '2',  
         name: 'E-2',
-        description: 'SAP'
+        description: 'SAP',
+        status: 'active'
       },
       {
         ID: '3',
         name: 'E-3',
-        description: 'SAP'
+        description: 'SAP',
+        status: 'active'
       }
     ],
     []
-  );
+  );*/
   const columns = React.useMemo(
     () => [
       {
@@ -137,6 +154,10 @@ export default function LivePreviewExample() {
       {
         Header: 'Description',
         accessor: 'description'
+      },
+      {
+        Header: 'Status',
+        accessor: 'status'
       }
     ],
     []
@@ -182,9 +203,13 @@ export default function LivePreviewExample() {
   };*/
   return (
     <Fragment>
-      <Styles>
-        <Table1 columns={columns} data={data} />
-      </Styles>
+      {loadingData ? (
+        <p>Loading, please wait...</p>
+      ) : (
+        <Styles>
+          <Table1 columns={columns} data={data} />
+        </Styles>
+      )}
     </Fragment>
   );
 }
