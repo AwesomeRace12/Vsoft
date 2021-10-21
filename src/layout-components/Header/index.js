@@ -17,8 +17,8 @@ import HeaderLogo from '../../layout-components/HeaderLogo';
 //import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
 //import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 const contentStyle = {
-  width: "100%",
-  height: "75%"
+  width: '100%',
+  height: '75%'
 };
 const Header = props => {
   const { headerShadow, headerFixed } = props;
@@ -35,10 +35,8 @@ const Header = props => {
         {!props.isCollapsedLayout && <HeaderLogo />}
         <Box className="app-header-toolbar">
           <Hidden lgUp>
-            <Box
-              className="app-logo-wrapper"
-              title="Carolina React Admin Dashboard with Material-UI Free">
-              <Link to="/DashboardDefault" className="app-logo-link">
+            <Box className="app-logo-wrapper">
+              <Link to="/RegularTables1" className="app-logo-link">
                 <IconButton
                   color="primary"
                   size="medium"
@@ -56,26 +54,24 @@ const Header = props => {
             </Box>
           </Hidden>
           <Hidden mdDown>
-            <Box className="d-flex align-items-center">
-              <Button
-                href="https://vsoft-usa.com"
-                target="_blank"
-                size="small"
-                variant="contained"
-                color="default"
-                className="mr-3">
-                Vsoft USA
-              </Button>
-            </Box>
+            <Box className="d-flex align-items-center"></Box>
           </Hidden>
           <Box className="d-flex align-items-center">
             <div>
               <Button
-                size="small"
+                size="x-large"
                 className="m-2 btn"
-                style={{ float: 'right', background: 'white' , color: 'red'}}
+                style={{ color: 'red', fontWeight: 'bold'}}
                 onClick={() => setOpen(o => !o)}>
-                <span className="btn-wrapper--icon">
+                <span
+                  className="btn-wrapper--icon"
+                  style={{
+                    padding: '20%',
+                    float: 'right',
+                    background: 'white',
+                    color: 'red',
+                    borderRadius: '50%'
+                  }}>
                   <FontAwesomeIcon icon={['fas', 'plus']} />
                 </span>
                 New

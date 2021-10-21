@@ -10,7 +10,7 @@ body {
 
     display: flex;
     align-items: center;
-    background: rgba(255,255,255,.08);
+    background: rgba(3, 17, 83, 0.08);
     padding-left: ($spacer);
     padding-right: ($spacer);
     justify-content: space-between;
@@ -18,8 +18,8 @@ body {
   }
 
   .app-header-logo-img {
-    width: 32px;
-    height: 32px;
+    width: 145px;
+    height: 50px;
   }
 
   .header-logo-wrapper {
@@ -28,12 +28,12 @@ body {
   }
 
   .header-logo-wrapper-btn {
-    padding: ($spacer / 3);
+    padding: (15px);
     color: $white;
-    background: rgba(255,255,255,.09);
+    background: rgba(67, 55, 107, 0.09);
 
     &:hover {
-      background: rgba(255,255,255,.14);
+      background: rgba(67, 55, 107, 0.09);
     }
   }
 
@@ -42,9 +42,10 @@ body {
   }
 
   .header-logo-text {
-    padding-left: $spacer / 2;
+    padding-left: 5px;
+    padding-top: 15px;
     font-size: $font-size-base * 1.1;
-    font-weight: bold;
+    font-weight: normal;
     width: auto;
     transition: all 0.5s cubic-bezier(0.685, 0.0473, 0.346, 1);
   }

@@ -30,15 +30,7 @@ const Footer = props => {
             </List>
           </div>
           <div className="app-footer--second">
-            <span>Carolina React Admin Dashboard with Material-UI Free</span> ©
-            2020 - crafted with <span className="text-danger px-1">❤</span> by{' '}
-            <a
-              href="https://uifort.com"
-              rel="noopener"
-              target="_blank"
-              title="UiFort.com">
-              UiFort.com
-            </a>
+            <span>iProcess</span>
           </div>
         </div>
       </Paper>

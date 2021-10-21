@@ -1,32 +1,31 @@
 import React, { Fragment } from 'react';
 
-import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 
 import { IconButton, Box } from '@material-ui/core';
 
-import projectLogo from '../../assets/images/vsoft-logo-cropped.png';
+import projectLogo from '../../assets/images/vsoft-final-01.png';
 
 const HeaderLogo = props => {
   return (
     <Fragment>
-      <div className={clsx('app-header-logo', {})}>
-        <Box className="header-logo-wrapper" title="VSoft">
-          <Link to="/RegularTables1" className="header-logo-wrapper-link">
-            <IconButton
-              color="primary"
-              size="medium"
-              className="header-logo-wrapper-btn">
-              <img
-                className="app-header-logo-img"
-                alt="Vsoft Workflow"
-                src={projectLogo}
-              />
-            </IconButton>
-          </Link>
-          <Box className="header-logo-text">Vsoft</Box>
+      <Box className="header-logo-wrapper" title="VSoft" alignment="center">
+        <Link to="/RegularTables1" className="header-logo-wrapper-link">
+          <IconButton
+            color="primary"
+            size="large"
+            className="header-logo-wrapper-btn">
+            <img
+              className="app-header-logo-img"
+              alt="Vsoft Workflow"
+              src={projectLogo}
+            />
+          </IconButton>
+        </Link>
+        <Box className="header-logo-text">
+          <span style={{ color: '#ff0000', fontSize: '175%'}}>iProcess</span>
         </Box>
-      </div>
+      </Box>
     </Fragment>
   );
 };
