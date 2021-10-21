@@ -106,10 +106,11 @@ export default function LivePreviewExample() {
   const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
-      const result = await axios(
+      const result = await axios.get(
         'http://localhost:8080/processData/processList'
       );
       setData(result.data);
+      console.log(result.data);
     })();
   }, []);
   //hard coded data
