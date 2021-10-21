@@ -106,16 +106,16 @@ export default function LivePreviewExample() {
   const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
-      axios.get(
-        'http://localhost:8080/processData/processList'
-
-      ).then((res) => {
-        setData(res.data)
-        }).catch((err) => {
-        console.log(err)
+      axios
+        .get('http://localhost:8080/processData/processList')
+        .then(res => {
+          setData(res.data);
         })
+        .catch(err => {
+          console.log(err);
+        });
     })();
-  }
+  }, []);
   //hard coded data
   /*const data = React.useMemo(
     () => [

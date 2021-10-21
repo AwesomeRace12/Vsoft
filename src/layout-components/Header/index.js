@@ -18,13 +18,17 @@ import HeaderLogo from '../../layout-components/HeaderLogo';
 //import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
 const contentStyle = {
   width: '100%',
-  height: '75%'
+  height: '70%'
 };
 const Header = props => {
   const { headerShadow, headerFixed } = props;
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
+  const [toggle, setToggle] = useState(false);
+  const triggerToggle = () => {
+    setToggle(!toggle);
+  }
   return (
     <Fragment>
       <AppBar
