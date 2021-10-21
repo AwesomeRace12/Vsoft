@@ -29,13 +29,12 @@ const Element1 = [
     data: { label: 'End' },
     position: { x: 500, y: 10 }
   }
-]
+];
 const Element2 = [
-   {
+  {
     id: '3',
     type: 'default',
-    data: { label: 'Unifier' },
-    
+    data: { label: 'Unifier' }
   },
   {
     id: '4',
@@ -68,12 +67,11 @@ const Element2 = [
     position: { x: 250, y: 5 }
   },
   {
-  id: '9',
-  type: 'default',
-  data: { label: 'diamond' },
-  position: { x: 250, y: 5 },
+    id: '9',
+    type: 'default',
+    data: { label: 'diamond' },
+    position: { x: 250, y: 5 }
   }
-  
 ];
 
 let id = 1;
@@ -135,8 +133,17 @@ export default function LivePreviewExample() {
         </span>
         Cancel
       </Button>
-      <Button>
-
+      <Button
+        onClick={doCancel}
+        type="default"
+        size="small"
+        color="primary"
+        style={{ float: 'right' }}
+        variant="contained">
+        <span className="btn-wrapper--icon">
+          <FontAwesomeIcon icon={['fas', 'arrow-left']} />
+        </span>
+        Save
       </Button>
       <Grid container spacing={4}>
         <Grid item xs={12} lg={12}>

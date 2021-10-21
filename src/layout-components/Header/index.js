@@ -25,10 +25,13 @@ const Header = props => {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-  const [toggle, setToggle] = useState(false);
+  const [toggle, setToggle] = useState(true);
   const triggerToggle = () => {
     setToggle(!toggle);
-  }
+    history.push('/DashboardDefault', {
+      from: 'LivePreviewExample'
+    });
+  };
   return (
     <Fragment>
       <AppBar
@@ -65,7 +68,7 @@ const Header = props => {
               <Button
                 size="x-large"
                 className="m-2 btn"
-                style={{ color: 'red', fontWeight: 'bold'}}
+                style={{ color: 'red', fontWeight: 'bold' }}
                 onClick={() => setOpen(o => !o)}>
                 <span
                   className="btn-wrapper--icon"
@@ -97,11 +100,7 @@ const Header = props => {
                   />
                   <br />
                   <Button
-                    onClick={() =>
-                      history.push('/DashboardDefault', {
-                        from: 'LivePreviewExample'
-                      })
-                    }
+                    onClick={triggerToggle}
                     type="submit"
                     size="small"
                     color="primary"
