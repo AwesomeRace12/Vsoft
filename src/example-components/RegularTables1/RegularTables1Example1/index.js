@@ -103,25 +103,17 @@ function Table1({ columns, data }) {
 //setPrefix('');
 export default function LivePreviewExample() {
   //data from axios get
-  /*const [loadingData, setLoadingData] = useState(true);
   const [data, setData] = useState([]);
-  const url = 'http://localhost:8080/processData/processList';
-
   useEffect(() => {
-    async function getData() {
-      await axios.get('http://localhost:8080/processData').then(response => {
-        console.log(response.data);
-        setData(response.data);
-        setLoadingData(false);
-      });
-    }
-    if (loadingData) {
-      getData();
-    }
-  }, [loadingData]);*/
-  
+    (async () => {
+      const result = await axios(
+        'http://localhost:8080/processData/processList'
+      );
+      setData(result.data);
+    })();
+  }, []);
   //hard coded data
-  const data = React.useMemo(
+  /*const data = React.useMemo(
     () => [
       {
         ID: '1',
@@ -143,7 +135,7 @@ export default function LivePreviewExample() {
       }
     ],
     []
-  );
+  );*/
   const columns = React.useMemo(
     () => [
       {
