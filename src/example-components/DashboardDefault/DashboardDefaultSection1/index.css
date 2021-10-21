@@ -1,47 +1,101 @@
-.dndflow {
-    flex-direction: column;
+body {
+    font-family: sans-serif;
+    color: #111;
+  }
+  
+  html,
+  body,
+  #root {
+    margin: 0;
+    height: 80%;
+  }
+  
+  #root {
     display: flex;
-    height: 100%;
-    width: 100%;
+    flex-direction: column;
   }
   
-  .dndflow aside {
-    border-right: 1px solid rgb(255, 255, 255);
-    padding: 150px 10px;
+  header {
+    padding: 10px;
+    border-bottom: 1px solid #eee;
+    display: flex;
+    font-weight: 700;
+    align-items: center;
+  }
+  
+  .logo {
+    text-decoration: none;
+    display: block;
+    line-height: 1;
+  }
+  
+  header a,
+  header a:focus,
+  header a:active,
+  header a:visited {
+    color: #111;
+  }
+  
+  header a:hover {
+    color: rgb(0, 0, 0);
+  }
+  
+  header select {
+    margin-left: 1em;
+  }
+  
+  .overview-example__add {
+    display: none;
+  }
+  
+  .react-flow__node a {
+    font-weight: 700;
+    color: #111;
+  }
+  
+  .react-flow__node.dark-node {
+    background: #0041d0;
+    color: #f8f8f8;
+  }
+  
+  .react-flow__node.dark {
+    background: #557;
+    color: #f8f8f8;
+  }
+  
+  .react-flow__node-selectorNode {
     font-size: 12px;
-    background: #97c9f1;
-    
+    background: #f0f2f3;
+    border: 1px solid 555;
+    border-radius: 5px;
+    text-align: center;
   }
   
-  .dndflow aside > * {
-    margin-bottom: 10px;
-    cursor: grab;
+  .react-flow__node-selectorNode .react-flow__handle {
+    border-color: #f0f2f3;
   }
   
-  .dndflow aside .description {
-    margin-bottom: 10px;
+  @media screen and (min-width: 768px) {
+    .overview-example__add {
+      display: block;
+    }
   }
-  
-  .dndflow .reactflow-wrapper {
-    flex-grow: 1;
-    height: 100%;
-    width: 80%;
-    z-index: 10000;
-  }
-  
-  .diamond {
+
+
+/*
+.diamond {
     cursor: grab;
     margin-bottom: 10px;
     width: 100px;
     height: 100px;
     background: #49c011;
-/* Rotate */
+
     -webkit-transform: rotate(-45deg);
     -moz-transform: rotate(-45deg);
     -ms-transform: rotate(-45deg);
     -o-transform: rotate(-45deg);
     transform: rotate(-45deg);
-/* Rotate Origin */
+
     -webkit-transform-origin: 0 100%;
     -moz-transform-origin: 0 100%;
     -ms-transform-origin: 0 100%;
@@ -50,7 +104,7 @@
     margin: 60px 0 10px 85px;
     
   }
-  .dndnode1 {
+  .one {
     flex-direction: column;
     display: flex;
     cursor: grab;
@@ -96,21 +150,4 @@
     background: #faea0f;
     
   }
-  
-  @media screen and (min-width: 768px) {
-    .dndnode1{
-      flex-direction: row;
-    }
-    .dndflow {
-      flex-direction: row;
-    }
-  
-    .dndflow aside {
-      width: 20%;
-      max-width: 180px;
-      z-index: 10000;
-    }
-  }
-  .react-flow{
-    position: static;
-  }
+  */
