@@ -102,7 +102,8 @@ function Table1({ columns, data }) {
 
 //setPrefix('');
 export default function LivePreviewExample() {
-  const [loadingData, setLoadingData] = useState(true);
+  //data from axios get
+  /*const [loadingData, setLoadingData] = useState(true);
   const [data, setData] = useState([]);
   const url = 'http://localhost:8080/processData/processList';
 
@@ -117,8 +118,10 @@ export default function LivePreviewExample() {
     if (loadingData) {
       getData();
     }
-  }, [loadingData]);
-  /*const data = React.useMemo(
+  }, [loadingData]);*/
+  
+  //hard coded data
+  const data = React.useMemo(
     () => [
       {
         ID: '1',
@@ -127,7 +130,7 @@ export default function LivePreviewExample() {
         status: 'active'
       },
       {
-        ID: '2',  
+        ID: '2',
         name: 'E-2',
         description: 'SAP',
         status: 'active'
@@ -140,7 +143,7 @@ export default function LivePreviewExample() {
       }
     ],
     []
-  );*/
+  );
   const columns = React.useMemo(
     () => [
       {
@@ -203,13 +206,9 @@ export default function LivePreviewExample() {
   };*/
   return (
     <Fragment>
-      {loadingData ? (
-        <p>Loading, please wait...</p>
-      ) : (
-        <Styles>
-          <Table1 columns={columns} data={data} />
-        </Styles>
-      )}
+      <Styles>
+        <Table1 columns={columns} data={data} />
+      </Styles>
     </Fragment>
   );
 }
