@@ -66,7 +66,6 @@ function Table1({ columns, data }) {
     getTableProps,
     getTableBodyProps,
     headerGroups,
-    rows,
     prepareRow,
     page,
     canPreviousPage,
@@ -75,7 +74,6 @@ function Table1({ columns, data }) {
     pageCount,
     nextPage,
     previousPage,
-    setPageSize,
     gotoPage,
     state: { pageIndex, pageSize }
   } = useTable(
@@ -143,7 +141,11 @@ function Table1({ columns, data }) {
 //setPrefix('');
 export default function LivePreviewExample() {
   //data from axios get
+<<<<<<< HEAD
  const [data, setData] = useState([]);
+=======
+  const [data, setData] = useState([]);
+>>>>>>> 6ca6c83b7c35c5267795e45b17d15c4eb4ce6a83
   useEffect(() => {
     (async () => {
       axios
@@ -157,134 +159,48 @@ export default function LivePreviewExample() {
     })();
   }, []);
   //hard coded data
+<<<<<<< HEAD
   /*const data = React.useMemo(
+=======
+  /* const data = React.useMemo(
+>>>>>>> 6ca6c83b7c35c5267795e45b17d15c4eb4ce6a83
     () => [
       {
-        ID: '1',
+        id: '1',
         name: 'E-1',
         description: 'SAP',
         status: 'active'
       },
       {
-        ID: '2',
+        id: '2',
         name: 'E-2',
         description: 'SAP',
         status: 'active'
       },
       {
-        ID: '3',
+        id: '3',
         name: 'E-3',
         description: 'SAP',
         status: 'active'
       },
       {
-        ID: '4',
+        id: '4',
         name: 'E-1',
         description: 'SAP',
         status: 'active'
       },
       {
-        ID: '5',
+        id: '5',
         name: 'E-2',
         description: 'SAP',
         status: 'active'
       },
       {
-        ID: '6',
-        name: 'E-3',
+        id: '6',
+        name: 'E-5',
         description: 'SAP',
         status: 'active'
       },
-      {
-        ID: '7',
-        name: 'E-1',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '8',
-        name: 'E-2',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '9',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '10',
-        name: 'E-1',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '11',
-        name: 'E-2',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '12',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '13',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '14',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '15',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '16',
-        name: 'E-1',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '17',
-        name: 'E-2',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '18',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '19',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '20',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      },
-      {
-        ID: '21',
-        name: 'E-3',
-        description: 'SAP',
-        status: 'active'
-      }
     ],
     []
   );*/

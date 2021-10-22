@@ -126,30 +126,6 @@ export default function LivePreviewExample() {
 
   return (
     <Fragment>
-      <Button
-        onClick={doCancel}
-        type="default"
-        size="small"
-        color="primary"
-        style={{ float: 'right' }}
-        variant="contained">
-        <span className="btn-wrapper--icon">
-          <FontAwesomeIcon icon={['fas', 'arrow-left']} />
-        </span>
-        Cancel
-      </Button>
-      <Button
-        onClick={doSave}
-        type="default"
-        size="small"
-        color="primary"
-        style={{ float: 'right' }}
-        variant="contained">
-        <span className="btn-wrapper--icon">
-          <FontAwesomeIcon icon={['fas', 'arrow-left']} />
-        </span>
-        Save
-      </Button>
       <Grid container spacing={4}>
         <Grid item xs={12} lg={12}>
           <Card className="card-box mb-4">

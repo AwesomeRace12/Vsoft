@@ -33,6 +33,22 @@ const Header = props => {
     description: '',
     status: ''
   });
+  const [toggle, setToggle] = useState(true);
+  const changeButton = () => {
+    setToggle(!toggle);
+  };
+  const doSave = () => {
+    setToggle(!toggle);
+    history.push('/RegularTables1', {
+      from: 'LivePreviewExample'
+    });
+  };
+  const doCancel = () => {
+    setToggle(!toggle);
+    history.push('/RegularTables1', {
+      from: 'LivePreviewExample'
+    });
+  };
 
   const handleAddFormChange = event => {
     event.preventDefault();
@@ -52,8 +68,6 @@ const Header = props => {
       description: addFormData.description,
       status: 'active'
     };
-    //console.log(newProcess);
-    //axios.post('http://localhost:8080/processData/insertProcess', newProcess);
     (async () => {
       axios
         .post('http://localhost:8080/processData/insertProcess', newProcess)
@@ -66,6 +80,7 @@ const Header = props => {
         });
     })();
     closeModal();
+    changeButton();
     history.push('/DashboardDefault', {
       from: 'LivePreviewExample'
     });
@@ -104,63 +119,94 @@ const Header = props => {
           </Hidden>
           <Box className="d-flex align-items-center">
             <div>
-              <Button
-                size="x-large"
-                className="m-2 btn"
-                style={{ color: 'red', fontWeight: 'bold' }}
-                onClick={() => setOpen(o => !o)}>
-                <span
-                  className="btn-wrapper--icon"
-                  style={{
-                    padding: '20%',
-                    float: 'right',
-                    background: 'white',
-                    color: 'red',
-                    borderRadius: '50%'
-                  }}>
-                  <FontAwesomeIcon icon={['fas', 'plus']} />
-                </span>
-                New
-              </Button>
-              <Popup
-                modal
-                open={open}
-                closeOnDocumentClick
-                onClose={closeModal}
-                contentStyle={contentStyle}>
-                <form onSubmit={handleAddFormSubmit}>
-                  <input
-                    type="text"
-                    name="name"
-                    placeholder="Enter a name"
-                    onChange={handleAddFormChange}
-                  />
-                  <br />
-                  <textarea
-                    rows="10"
-                    cols="100"
-                    name="description"
-                    placeholder="Enter a description"
-                    onChange={handleAddFormChange}
-                  />
-                  <br />
+              {toggle ? (
+                <>
                   <Button
-                    type="submit"
+                    size="x-large"
+                    className="m-2 btn"
+                    style={{ color: 'red', fontWeight: 'bold' }}
+                    onClick={() => setOpen(o => !o)}>
+                    <span
+                      className="btn-wrapper--icon"
+                      style={{
+                        padding: '20%',
+                        float: 'right',
+                        background: 'white',
+                        color: 'red',
+                        borderRadius: '50%'
+                      }}>
+                      <FontAwesomeIcon icon={['fas', 'plus']} />
+                    </span>
+                    New
+                  </Button>
+                  <Popup
+                    modal
+                    open={open}
+                    closeOnDocumentClick
+                    onClose={closeModal}
+                    contentStyle={contentStyle}>
+                    <form onSubmit={handleAddFormSubmit}>
+                      <input
+                        type="text"
+                        name="name"
+                        placeholder="Enter a name"
+                        onChange={handleAddFormChange}
+                      />
+                      <br />
+                      <textarea
+                        rows="10"
+                        cols="100"
+                        name="description"
+                        placeholder="Enter a description"
+                        onChange={handleAddFormChange}
+                      />
+                      <br />
+                      <Button
+                        type="submit"
+                        size="small"
+                        color="primary"
+                        variant="contained">
+                        Create
+                      </Button>
+                      <Button
+                        type="button"
+                        size="small"
+                        color="primary"
+                        variant="contained"
+                        onClick={closeModal}>
+                        Cancel
+                      </Button>
+                    </form>
+                  </Popup>
+                </>
+              ) : (
+                <>
+                  <Button
+                    onClick={doSave}
+                    type="default"
                     size="small"
-                    color="primary"
+                    style={{
+                      float: 'right',
+                      color: 'white',
+                      background: 'purple'
+                    }}
                     variant="contained">
-                    Create
+                    Save
                   </Button>
                   <Button
-                    type="button"
+                    onClick={doCancel}
+                    type="default"
                     size="small"
-                    color="primary"
-                    variant="contained"
-                    onClick={closeModal}>
+                    style={{
+                      float: 'right',
+                      color: 'white',
+                      background: 'purple'
+                    }}
+                    variant="contained">
                     Cancel
                   </Button>
-                </form>
-              </Popup>
+                </>
+              )}
             </div>
           </Box>
         </Box>
