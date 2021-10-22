@@ -56,6 +56,8 @@ const Styles = styled.div`
   }
   .pagination {
     padding: 0.5rem;
+    color: white;
+    background: #384275;
   }
 `;
 
@@ -80,7 +82,7 @@ function Table1({ columns, data }) {
     {
       columns,
       data,
-      initialState: { pageIndex: 0 }
+      initialState: { pageIndex: 0, pageSize: 20 }
     },
     usePagination
   );
@@ -97,7 +99,7 @@ function Table1({ columns, data }) {
           ))}
         </TableHead>
         <TableBody {...getTableBodyProps()}>
-          {rows.map(row => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               <TableRow {...row.getRowProps()}>
@@ -131,18 +133,8 @@ function Table1({ columns, data }) {
           <strong>
             {pageIndex + 1} of {pageOptions.length}
           </strong>{' '}
-        </span>
-        <select
-          value={pageSize}
-          onChange={e => {
-            setPageSize(Number(e.target.value));
-          }}>
-          {[20].map(pageSize => (
-            <option key={pageSize} value={pageSize}>
-              Show {pageSize}
-            </option>
-          ))}
-        </select>
+        </span>{' '}
+        <span> Showing {pageSize} records</span>
       </div>
     </TableContainer>
   );
@@ -151,7 +143,7 @@ function Table1({ columns, data }) {
 //setPrefix('');
 export default function LivePreviewExample() {
   //data from axios get
-  const [data, setData] = useState([]);
+ /* const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
       axios
@@ -163,9 +155,9 @@ export default function LivePreviewExample() {
           console.log(err);
         });
     })();
-  }, []);
+  }, []);*/
   //hard coded data
- /* const data = React.useMemo(
+  const data = React.useMemo(
     () => [
       {
         ID: '1',
@@ -184,10 +176,118 @@ export default function LivePreviewExample() {
         name: 'E-3',
         description: 'SAP',
         status: 'active'
+      },
+      {
+        ID: '4',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '5',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '6',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '7',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '8',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '9',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '10',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '11',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '12',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '13',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '14',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '15',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '16',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '17',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '18',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '19',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '20',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '21',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
       }
     ],
     []
-  );*/
+  );
   const columns = React.useMemo(
     () => [
       {
