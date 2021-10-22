@@ -56,7 +56,7 @@ const Header = props => {
     //axios.post('http://localhost:8080/processData/insertProcess', newProcess);
     (async () => {
       axios
-        .post('https://app.fakejson.com/q', newProcess)
+        .post('http://localhost:8080/processData/insertProcess', newProcess)
         .then(res => {
           setData(res.data);
           console.log(newProcess);
