@@ -1,5 +1,5 @@
 import React, { Fragment, useState } from 'react';
-
+import axios from 'axios';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -7,7 +7,7 @@ import Popup from 'reactjs-popup';
 import { Hidden, IconButton, AppBar, Box, Button } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import nextId, { setPrefix } from 'react-id-generator';
 import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
 import projectLogo from '../../assets/images/react.svg';
 
@@ -16,6 +16,7 @@ import HeaderLogo from '../../layout-components/HeaderLogo';
 
 //import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
 //import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+setPrefix('');
 const contentStyle = {
   width: '100%',
   height: '70%'
@@ -25,13 +26,37 @@ const Header = props => {
   const history = useHistory();
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
-  const [toggle, setToggle] = useState(true);
-  const triggerToggle = () => {
-    setToggle(!toggle);
+  const [addFormData, setAddFormData] = useState({
+    id: '',
+    name: '',
+    description: '',
+    status: ''
+  });
+
+  const handleAddFormChange = event => {
+    event.preventDefault();
+    const fieldID = event.target.getAttribute('name');
+    const fieldValue = event.target.value;
+    const newFormData = { ...addFormData };
+    setAddFormData(newFormData);
+  };
+
+  const handleAddFormSubmit = event => {
+    event.preventDefault();
+
+    const newProcess = {
+      id: nextId(),
+      name: addFormData.name,
+      description: addFormData.description,
+      status: 'active'
+    };
+    axios.post('http://localhost:8080/processData/insertProcess', newProcess);
+    closeModal();
     history.push('/DashboardDefault', {
       from: 'LivePreviewExample'
     });
   };
+
   return (
     <Fragment>
       <AppBar
@@ -89,18 +114,23 @@ const Header = props => {
                 closeOnDocumentClick
                 onClose={closeModal}
                 contentStyle={contentStyle}>
-                <form>
-                  <input type="text" name="name" placeholder="Enter a name" />
+                <form onSubmit={handleAddFormSubmit}>
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Enter a name"
+                    onChange={handleAddFormChange}
+                  />
                   <br />
                   <textarea
                     rows="10"
                     cols="100"
                     name="description"
                     placeholder="Enter a description"
+                    onChange={handleAddFormChange}
                   />
                   <br />
                   <Button
-                    onClick={triggerToggle}
                     type="submit"
                     size="small"
                     color="primary"

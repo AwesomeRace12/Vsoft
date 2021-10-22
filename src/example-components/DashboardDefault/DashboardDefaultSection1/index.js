@@ -118,6 +118,11 @@ export default function LivePreviewExample() {
       from: 'LivePreviewExample'
     });
   };
+  const doSave = () => {
+    history.push('/RegularTables1', {
+      from: 'LivePreviewExample'
+    });
+  };
 
   return (
     <Fragment>
@@ -134,7 +139,7 @@ export default function LivePreviewExample() {
         Cancel
       </Button>
       <Button
-        onClick={doCancel}
+        onClick={doSave}
         type="default"
         size="small"
         color="primary"
