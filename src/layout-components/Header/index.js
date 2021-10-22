@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useState, useEffect } from 'react';
 import axios from 'axios';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
@@ -24,6 +24,7 @@ const contentStyle = {
 const Header = props => {
   const { headerShadow, headerFixed } = props;
   const history = useHistory();
+  const [data, setData] = useState([]);
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
   const [addFormData, setAddFormData] = useState({
@@ -38,6 +39,7 @@ const Header = props => {
     const fieldID = event.target.getAttribute('name');
     const fieldValue = event.target.value;
     const newFormData = { ...addFormData };
+    newFormData[fieldID] = fieldValue;
     setAddFormData(newFormData);
   };
 
@@ -50,7 +52,19 @@ const Header = props => {
       description: addFormData.description,
       status: 'active'
     };
-    axios.post('http://localhost:8080/processData/insertProcess', newProcess);
+    //console.log(newProcess);
+    //axios.post('http://localhost:8080/processData/insertProcess', newProcess);
+    (async () => {
+      axios
+        .post('https://app.fakejson.com/q', newProcess)
+        .then(res => {
+          setData(res.data);
+          console.log(newProcess);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    })();
     closeModal();
     history.push('/DashboardDefault', {
       from: 'LivePreviewExample'

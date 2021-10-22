@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import 'reactjs-popup/dist/index.css';
 //import history from './../../../history';
 //import { Router, Route, Link } from 'react-router-dom';
-import { useTable } from 'react-table';
+import { useTable, usePagination } from 'react-table';
 //import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -54,6 +54,11 @@ const Styles = styled.div`
       font-weight: bold;
     }
   }
+  .pagination {
+    padding: 0.5rem;
+    color: white;
+    background: #384275;
+  }
 `;
 
 function Table1({ columns, data }) {
@@ -62,11 +67,25 @@ function Table1({ columns, data }) {
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow
-  } = useTable({
-    columns,
-    data
-  });
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    nextPage,
+    previousPage,
+    setPageSize,
+    gotoPage,
+    state: { pageIndex, pageSize }
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0, pageSize: 20 }
+    },
+    usePagination
+  );
   return (
     <TableContainer className="mb-4" component={Paper}>
       <Table striped {...getTableProps()} aria-label="simple table">
@@ -80,7 +99,7 @@ function Table1({ columns, data }) {
           ))}
         </TableHead>
         <TableBody {...getTableBodyProps()}>
-          {rows.map(row => {
+          {page.map((row, i) => {
             prepareRow(row);
             return (
               <TableRow {...row.getRowProps()}>
@@ -96,6 +115,27 @@ function Table1({ columns, data }) {
           })}
         </TableBody>
       </Table>
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>{' '}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </button>{' '}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>{' '}
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>{' '}
+        <span> Showing {pageSize} records</span>
+      </div>
     </TableContainer>
   );
 }
@@ -103,7 +143,7 @@ function Table1({ columns, data }) {
 //setPrefix('');
 export default function LivePreviewExample() {
   //data from axios get
-  const [data, setData] = useState([]);
+ /* const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
       axios
@@ -115,9 +155,9 @@ export default function LivePreviewExample() {
           console.log(err);
         });
     })();
-  }, []);
+  }, []);*/
   //hard coded data
-  /*const data = React.useMemo(
+  const data = React.useMemo(
     () => [
       {
         ID: '1',
@@ -136,10 +176,118 @@ export default function LivePreviewExample() {
         name: 'E-3',
         description: 'SAP',
         status: 'active'
+      },
+      {
+        ID: '4',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '5',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '6',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '7',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '8',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '9',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '10',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '11',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '12',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '13',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '14',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '15',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '16',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '17',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '18',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '19',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '20',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        ID: '21',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
       }
     ],
     []
-  );*/
+  );
   const columns = React.useMemo(
     () => [
       {
