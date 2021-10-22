@@ -51,7 +51,7 @@ const Styles = styled.div`
       background: #0b9e86;
       border-bottom: 3px solid white;
       color: white;
-      fontweight: bold;
+      font-weight: bold;
     }
   }
 `;
@@ -144,7 +144,7 @@ export default function LivePreviewExample() {
     () => [
       {
         Header: 'ID',
-        accessor: 'ID'
+        accessor: 'id'
       },
       {
         Header: 'Name',
