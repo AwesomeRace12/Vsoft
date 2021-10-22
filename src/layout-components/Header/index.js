@@ -38,6 +38,7 @@ const Header = props => {
     const fieldID = event.target.getAttribute('name');
     const fieldValue = event.target.value;
     const newFormData = { ...addFormData };
+    newFormData[fieldID] = fieldValue;
     setAddFormData(newFormData);
   };
 
@@ -50,6 +51,7 @@ const Header = props => {
       description: addFormData.description,
       status: 'active'
     };
+    console.log(newProcess);
     axios.post('http://localhost:8080/processData/insertProcess', newProcess);
     closeModal();
     history.push('/DashboardDefault', {

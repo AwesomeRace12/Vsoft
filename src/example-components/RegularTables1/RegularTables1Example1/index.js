@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import 'reactjs-popup/dist/index.css';
 //import history from './../../../history';
 //import { Router, Route, Link } from 'react-router-dom';
-import { useTable } from 'react-table';
+import { useTable, usePagination } from 'react-table';
 //import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -54,6 +54,9 @@ const Styles = styled.div`
       fontweight: bold;
     }
   }
+  .pagination {
+    padding: 0.5rem;
+  }
 `;
 
 function Table1({ columns, data }) {
@@ -62,11 +65,25 @@ function Table1({ columns, data }) {
     getTableBodyProps,
     headerGroups,
     rows,
-    prepareRow
-  } = useTable({
-    columns,
-    data
-  });
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageOptions,
+    pageCount,
+    nextPage,
+    previousPage,
+    setPageSize,
+    gotoPage,
+    state: { pageIndex, pageSize }
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0 }
+    },
+    usePagination
+  );
   return (
     <TableContainer className="mb-4" component={Paper}>
       <Table striped {...getTableProps()} aria-label="simple table">
@@ -96,6 +113,37 @@ function Table1({ columns, data }) {
           })}
         </TableBody>
       </Table>
+      <div className="pagination">
+        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+          {'<<'}
+        </button>{' '}
+        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+          {'<'}
+        </button>{' '}
+        <button onClick={() => nextPage()} disabled={!canNextPage}>
+          {'>'}
+        </button>{' '}
+        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
+          {'>>'}
+        </button>{' '}
+        <span>
+          Page{' '}
+          <strong>
+            {pageIndex + 1} of {pageOptions.length}
+          </strong>{' '}
+        </span>
+        <select
+          value={pageSize}
+          onChange={e => {
+            setPageSize(Number(e.target.value));
+          }}>
+          {[20].map(pageSize => (
+            <option key={pageSize} value={pageSize}>
+              Show {pageSize}
+            </option>
+          ))}
+        </select>
+      </div>
     </TableContainer>
   );
 }
@@ -103,7 +151,7 @@ function Table1({ columns, data }) {
 //setPrefix('');
 export default function LivePreviewExample() {
   //data from axios get
-  const [data, setData] = useState([]);
+  /* const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
       axios
@@ -115,9 +163,9 @@ export default function LivePreviewExample() {
           console.log(err);
         });
     })();
-  }, []);
+  }, []);*/
   //hard coded data
-  /*const data = React.useMemo(
+  const data = React.useMemo(
     () => [
       {
         ID: '1',
@@ -139,7 +187,7 @@ export default function LivePreviewExample() {
       }
     ],
     []
-  );*/
+  );
   const columns = React.useMemo(
     () => [
       {
