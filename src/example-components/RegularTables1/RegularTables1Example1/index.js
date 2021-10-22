@@ -141,11 +141,7 @@ function Table1({ columns, data }) {
 //setPrefix('');
 export default function LivePreviewExample() {
   //data from axios get
-<<<<<<< HEAD
- const [data, setData] = useState([]);
-=======
   const [data, setData] = useState([]);
->>>>>>> 6ca6c83b7c35c5267795e45b17d15c4eb4ce6a83
   useEffect(() => {
     (async () => {
       axios
@@ -159,11 +155,7 @@ export default function LivePreviewExample() {
     })();
   }, []);
   //hard coded data
-<<<<<<< HEAD
-  /*const data = React.useMemo(
-=======
   /* const data = React.useMemo(
->>>>>>> 6ca6c83b7c35c5267795e45b17d15c4eb4ce6a83
     () => [
       {
         id: '1',
