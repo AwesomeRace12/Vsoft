@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Popup from 'reactjs-popup';
 import { Hidden, IconButton, AppBar, Box, Button } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import nextId, { setPrefix } from 'react-id-generator';
 import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
@@ -24,15 +24,7 @@ const contentStyle = {
 const Header = props => {
   const { headerShadow, headerFixed } = props;
   const history = useHistory();
-  const [data, setData] = useState([]);
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
-  const [addFormData, setAddFormData] = useState({
-    id: '',
-    name: '',
-    description: '',
-    status: ''
-  });
+
   const [toggle, setToggle] = useState(true);
   const changeButton = () => {
     setToggle(!toggle);
@@ -49,42 +41,7 @@ const Header = props => {
       from: 'LivePreviewExample'
     });
   };
-
-  const handleAddFormChange = event => {
-    event.preventDefault();
-    const fieldID = event.target.getAttribute('name');
-    const fieldValue = event.target.value;
-    const newFormData = { ...addFormData };
-    newFormData[fieldID] = fieldValue;
-    setAddFormData(newFormData);
-  };
-
-  const handleAddFormSubmit = event => {
-    event.preventDefault();
-
-    const newProcess = {
-      id: nextId(),
-      name: addFormData.name,
-      description: addFormData.description,
-      status: 'active'
-    };
-    (async () => {
-      axios
-        .post('http://localhost:8080/processData/insertProcess', newProcess)
-        .then(res => {
-          setData(res.data);
-          console.log(newProcess);
-        })
-        .catch(err => {
-          console.log(err);
-        });
-    })();
-    closeModal();
-    changeButton();
-    history.push('/DashboardDefault', {
-      from: 'LivePreviewExample'
-    });
-  };
+  const location = useLocation();
 
   return (
     <Fragment>
@@ -119,67 +76,7 @@ const Header = props => {
           </Hidden>
           <Box className="d-flex align-items-center">
             <div>
-              {toggle ? (
-                <>
-                  <Button
-                    size="x-large"
-                    className="m-2 btn"
-                    style={{ color: 'red', fontWeight: 'bold' }}
-                    onClick={() => setOpen(o => !o)}>
-                    <span
-                      className="btn-wrapper--icon"
-                      style={{
-                        padding: '20%',
-                        float: 'right',
-                        background: 'white',
-                        color: 'red',
-                        borderRadius: '50%'
-                      }}>
-                      <FontAwesomeIcon icon={['fas', 'plus']} />
-                    </span>
-                    New
-                  </Button>
-                  <Popup
-                    modal
-                    open={open}
-                    closeOnDocumentClick
-                    onClose={closeModal}
-                    contentStyle={contentStyle}>
-                    <form onSubmit={handleAddFormSubmit}>
-                      <input
-                        type="text"
-                        name="name"
-                        placeholder="Enter a name"
-                        onChange={handleAddFormChange}
-                      />
-                      <br />
-                      <textarea
-                        rows="10"
-                        cols="100"
-                        name="description"
-                        placeholder="Enter a description"
-                        onChange={handleAddFormChange}
-                      />
-                      <br />
-                      <Button
-                        type="submit"
-                        size="small"
-                        color="primary"
-                        variant="contained">
-                        Create
-                      </Button>
-                      <Button
-                        type="button"
-                        size="small"
-                        color="primary"
-                        variant="contained"
-                        onClick={closeModal}>
-                        Cancel
-                      </Button>
-                    </form>
-                  </Popup>
-                </>
-              ) : (
+              {location.pathname === '/DashboardDefault' ? (
                 <>
                   <Button
                     onClick={doSave}
@@ -206,6 +103,8 @@ const Header = props => {
                     Cancel
                   </Button>
                 </>
+              ) : (
+                <></>
               )}
             </div>
           </Box>

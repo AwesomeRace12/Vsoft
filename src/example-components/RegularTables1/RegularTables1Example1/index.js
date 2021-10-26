@@ -1,5 +1,5 @@
 import React, { Fragment, useEffect, useState } from 'react';
-//import Popup from 'reactjs-popup';
+
 import 'reactjs-popup/dist/index.css';
 //import history from './../../../history';
 //import { Router, Route, Link } from 'react-router-dom';
@@ -7,6 +7,9 @@ import { useTable, usePagination } from 'react-table';
 //import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
+import { useHistory } from 'react-router-dom';
+import nextId, { setPrefix } from 'react-id-generator';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 //import { nanoid } from 'nanoid';
 
@@ -17,7 +20,14 @@ import {
   TableHead,
   TableRow,
   Paper,
-  Table
+  Table,
+  Button,
+  Box,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle
 } from '@material-ui/core';
 const Styles = styled.div`
   table {
@@ -33,6 +43,9 @@ const Styles = styled.div`
         td {
           border-bottom: 0;
         }
+      }
+      :hover {
+        background-color: #abb478;
       }
     }
 
@@ -60,7 +73,7 @@ const Styles = styled.div`
     background: #384275;
   }
 `;
-
+setPrefix();
 function Table1({ columns, data }) {
   const {
     getTableProps,
@@ -70,7 +83,6 @@ function Table1({ columns, data }) {
     page,
     canPreviousPage,
     canNextPage,
-    pageOptions,
     pageCount,
     nextPage,
     previousPage,
@@ -91,7 +103,12 @@ function Table1({ columns, data }) {
           {headerGroups.map(headerGroup => (
             <tr {...headerGroup.getHeaderGroupProps()}>
               {headerGroup.headers.map(column => (
-                <th {...column.getHeaderProps()}>{column.render('Header')}</th>
+                <th
+                  {...column.getHeaderProps({
+                    style: { width: column.width }
+                  })}>
+                  {column.render('Header')}
+                </th>
               ))}
             </tr>
           ))}
@@ -127,10 +144,7 @@ function Table1({ columns, data }) {
           {'>>'}
         </button>{' '}
         <span>
-          Page{' '}
-          <strong>
-            {pageIndex + 1} of {pageOptions.length}
-          </strong>{' '}
+          Page <strong>{pageIndex + 1}</strong>{' '}
         </span>{' '}
         <span> Showing {pageSize} records</span>
       </div>
@@ -140,6 +154,7 @@ function Table1({ columns, data }) {
 
 //setPrefix('');
 export default function LivePreviewExample() {
+  const history = useHistory();
   //data from axios get
   const [data, setData] = useState([]);
   useEffect(() => {
@@ -155,7 +170,7 @@ export default function LivePreviewExample() {
     })();
   }, []);
   //hard coded data
-  /* const data = React.useMemo(
+  /*const data = React.useMemo(
     () => [
       {
         id: '1',
@@ -192,7 +207,7 @@ export default function LivePreviewExample() {
         name: 'E-5',
         description: 'SAP',
         status: 'active'
-      },
+      }
     ],
     []
   );*/
@@ -200,7 +215,8 @@ export default function LivePreviewExample() {
     () => [
       {
         Header: 'ID',
-        accessor: 'id'
+        accessor: 'id',
+        width: 50
       },
       {
         Header: 'Name',
@@ -212,28 +228,32 @@ export default function LivePreviewExample() {
       },
       {
         Header: 'Status',
-        accessor: 'status'
+        accessor: 'status',
+        width: 50
       }
     ],
     []
   );
-  /*const history = useHistory();
-  const [processes, setProcesses] = useState(data);
-  const [showForm, setShowForm] = useState(false);
+
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
   const [addFormData, setAddFormData] = useState({
-    ID: '',
+    id: '',
     name: '',
-    description: ''
+    description: '',
+    status: ''
   });
+  const [toggle, setToggle] = useState(true);
+  const changeButton = () => {
+    setToggle(!toggle);
+  };
 
   const handleAddFormChange = event => {
     event.preventDefault();
-
     const fieldID = event.target.getAttribute('name');
     const fieldValue = event.target.value;
     const newFormData = { ...addFormData };
     newFormData[fieldID] = fieldValue;
-
     setAddFormData(newFormData);
   };
 
@@ -241,23 +261,239 @@ export default function LivePreviewExample() {
     event.preventDefault();
 
     const newProcess = {
-      ID: nextId(),
+      id: nextId(),
       name: addFormData.name,
-      description: addFormData.description
+      description: addFormData.description,
+      status: 'active'
     };
-
-    const newProcesses = [...processes, newProcess];
-    setProcesses(newProcesses);
+    (async () => {
+      axios
+        .post('http://localhost:8080/processData/insertProcess', newProcess)
+        .then(res => {
+          setData(res.data);
+          console.log(newProcess);
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    })();
+    closeModal();
+    changeButton();
+    history.push('/DashboardDefault', {
+      from: 'LivePreviewExample'
+    });
   };
 
-  const showForm1 = () => {
-    setShowForm(!showForm);
+  const [edit, setEdit] = useState(false);
+  const closeEdit = () => setEdit(false);
+
+  const [toDelete, setDelete] = useState(false);
+  const closeDelete = () => setDelete(false);
+  const [deleteFormID, setDeleteFormID] = useState({ id: '' });
+  
+  const handleDeleteFormChange = event => {
+    event.preventDefault();
+    const fieldID = event.target.getAttribute('name');
+    const fieldValue = event.target.value;
+    const newFormData = { ...addFormData };
+    newFormData[fieldID] = fieldValue;
+    setDeleteFormID(newFormData);
   };
-  const doCancel = () => {
-    setShowForm(!showForm);
-  };*/
+
+  const handleDeleteFormSubmit = event => {
+    event.preventDefault();
+    (async () => {
+      axios
+        .delete('http://localhost:8080/processData/insertProcess', deleteFormID)
+        .then(console.log(deleteFormID))
+        .catch(err => {
+          console.log(err);
+        });
+    })();
+    closeDelete();
+  };
+
   return (
     <Fragment>
+      <Box className="d-flex align-items-center">
+        <Button
+          size="large"
+          className="m-2 btn"
+          style={{ color: 'red', fontWeight: 'bold', float: 'left' }}
+          onClick={() => setOpen(o => !o)}>
+          <span
+            className="btn-wrapper--icon"
+            style={{
+              padding: '0%',
+              float: 'right',
+              background: 'white',
+              color: 'red',
+              borderRadius: '0%'
+            }}>
+            <FontAwesomeIcon icon={['fas', 'plus']} />
+          </span>
+          New
+        </Button>
+        <Button
+          size="large"
+          className="m-2 btn"
+          style={{ color: 'grey', fontWeight: 'bold', float: 'right' }}
+          onClick={() => setEdit(o => !o)}>
+          <span
+            className="btn-wrapper--icon"
+            style={{
+              padding: '0%',
+              float: 'right',
+              background: 'white',
+              color: 'grey',
+              borderRadius: '0%'
+            }}>
+            <FontAwesomeIcon icon={['fas', 'edit']} />
+          </span>
+          Edit
+        </Button>
+        <Button
+          size="large"
+          style={{ color: 'red', fontWeight: 'bold', float: 'left' }}
+          onClick={() => setDelete(o => !o)}>
+          <span
+            style={{
+              float: 'right',
+              color: 'red'
+            }}>
+            <FontAwesomeIcon icon={['fas', 'trash']} />
+          </span>
+          Delete
+        </Button>
+        <Dialog open={open} onClose={closeModal}>
+          <DialogTitle>New</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <form onSubmit={handleAddFormSubmit}>
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter a name"
+                  onChange={handleAddFormChange}
+                />
+                <br />
+                <br />
+                <textarea
+                  rows="10"
+                  cols="60"
+                  name="description"
+                  placeholder="Enter a description"
+                  onChange={handleAddFormChange}
+                />
+                <br />
+              </form>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              type="submit"
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={handleAddFormSubmit}>
+              Create
+            </Button>
+            <Button
+              type="button"
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={closeModal}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={edit} onClose={closeEdit}>
+          <DialogTitle>Edit</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <form onSubmit={handleAddFormSubmit}>
+                <input type="text" name="id" placeholder="Enter an id" />
+                <br />
+                <br />
+                <input
+                  type="text"
+                  name="name"
+                  placeholder="Enter a name"
+                  onChange={handleAddFormChange}
+                />
+                <br />
+                <br />
+                <textarea
+                  rows="10"
+                  cols="60"
+                  name="description"
+                  placeholder="Enter a description"
+                  onChange={handleAddFormChange}
+                />
+                <br />
+                <label htmlFor="status">Status:</label>
+                <select name="status" id="status">
+                  <option value="active">active</option>
+                  <option value="inactive">inactive</option>
+                </select>
+              </form>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              type="submit"
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={handleAddFormSubmit}>
+              Save
+            </Button>
+            <Button
+              type="button"
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={closeEdit}>
+              Cancel
+            </Button>
+          </DialogActions>
+        </Dialog>
+        <Dialog open={toDelete} onClose={closeDelete}>
+          <DialogTitle>Delete</DialogTitle>
+          <DialogContent>
+            <DialogContentText>
+              <form onSubmit={handleDeleteFormSubmit}>
+                <input
+                  type="text"
+                  name="id"
+                  placeholder="Enter an id to delete"
+                  onChange={handleDeleteFormChange}
+                />
+              </form>
+              <span>Are you sure you want to delete?</span>
+            </DialogContentText>
+          </DialogContent>
+          <DialogActions>
+            <Button
+              type="submit"
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={handleDeleteFormSubmit}>
+              Yes
+            </Button>
+            <Button
+              type="button"
+              size="small"
+              color="primary"
+              variant="contained"
+              onClick={closeDelete}>
+              No
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </Box>
       <Styles>
         <Table1 columns={columns} data={data} />
       </Styles>
