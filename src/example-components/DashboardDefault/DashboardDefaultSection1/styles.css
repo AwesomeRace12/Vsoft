@@ -1,108 +1,107 @@
 .dndflow {
-    flex-direction: column;
-    display: flex;
-    height: 100%;
+  flex-direction: column;
+  display: flex;
+  height: 100%;
+}
+
+.dndflow aside {
+  border-right: 1px solid #eee;
+  padding: 15px 10px;
+  font-size: 12px;
+  text-decoration-color: #eee;
+  background: #D3D3D3;
+  color:black;
+  text-align: center;
+}
+
+.dndflow aside .description {
+  margin-bottom: 10px;
+  color:black;
+
+}
+.dndflow .dndnode.output {
+  border-radius: 50%;
+  color: white;
+  background-color: #0041d0;
+  width: 100px;
+}
+.dndflow .dndnode.input {
+  border-radius: 50%;
+  color: white;
+  width: 100px;
+  border-color: black;
+  background-color: #0041d0;
+}
+
+.dndflow .dndnode {
+  height: 40px;
+  width: 200px;
+  padding: 4px;
+  border: 1px solid #1a192b;
+  border-radius: 2px;
+  margin-bottom: 10px;
+  display: flex;
+  color: rgb(255, 255, 255);
+  justify-content: center;
+  align-items: center;
+  cursor: grab;
+}
+
+
+.dndflow .dndnode.default {
+  color: #eee;
+  width: 300;
+  height: 100;
+  background: #000000;
+  border-color: #0041d0;
+}
+
+.dndflow .dndnode.data {
+  color: #eee;
+  width: 300;
+  height: 100;
+  background: #10033f;
+  border-color: #10033f;
+}
+
+
+.dndflow .dndnode.FTP {
+  background: blue;
+  width: 100px;
+  color:white;
+  border-color: black;
+  stroke: green;
+}
+
+.dndflow .reactflow-wrapper {
+  flex-grow: 1;
+  height: 100%;
+}
+.targetHandleStyle {
+  background: "#555";
+}
+.targetHAndleStyle .sourceHandleStyleA {
+  top: 10;
+}
+
+.targetHAndleStyle .sourceHandleStyleB {
+  bottom: 10;
+}
+
+
+.boundngBox {
+  display: flex;
+  flex-direction: column;
+}
+
+
+@media screen and (min-width: 768px) {
+  .dndflow {
+    flex-direction: row;
   }
-  
+
   .dndflow aside {
-    border-right: 1px solid #eee;
-    padding: 15px 10px;
-    font-size: 12px;
-    text-decoration-color: #eee;
-    background: #D3D3D3;
-    color:black;
-    text-align: center;
+    width: 20%;
+    max-width: 250px;
   }
-  
-  .dndflow aside .description {
-    margin-bottom: 10px;
-    color:black;
-
-  }
-  .dndflow .dndnode.output {
-    border-radius: 50%;
-    color: white;
-    background-color: #0041d0;
-    width: 100px;
-  }
-  .dndflow .dndnode.input {
-    border-radius: 50%;
-    color: white;
-    width: 100px;
-    border-color: black;
-    background-color: #0041d0;
-  }
-
-  .dndflow .dndnode {
-    height: 40px;
-    width: 200px;
-    padding: 4px;
-    border: 1px solid #1a192b;
-    border-radius: 2px;
-    margin-bottom: 10px;
-    display: flex;
-    color: rgb(255, 255, 255);
-    justify-content: center;
-    align-items: center;
-    cursor: grab;
-  }
-  
- 
-  .dndflow .dndnode.default {
-    color: #eee;
-    width: 300;
-    height: 100;
-    background: #000000;
-    border-color: #0041d0;
-  }
-  
-  .dndflow .dndnode.data {
-    color: #eee;
-    width: 300;
-    height: 100;
-    background: #10033f;
-    border-color: #10033f;
-  }
-  
-  
-  .dndflow .dndnode.FTP {
-    background: blue;
-    width: 100px;
-    color:white;
-    border-color: black;
-    stroke: green;
-  }
- 
-  .dndflow .reactflow-wrapper {
-    flex-grow: 1;
-    height: 100%;
-  }
-  .targetHandleStyle {
-    background: "#555";
-  }
-  .targetHAndleStyle .sourceHandleStyleA {
-    top: 10;
-  }
-
-  .targetHAndleStyle .sourceHandleStyleB {
-    bottom: 10;
-  }
-  
-  
-  .boundngBox {
-    display: flex;
-    flex-direction: column;
-  }
-  
- 
-  @media screen and (min-width: 768px) {
-    .dndflow {
-      flex-direction: row;
-    }
-  
-    .dndflow aside {
-      width: 20%;
-      max-width: 250px;
-    }
-  }
-  
+}
