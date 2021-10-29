@@ -7,7 +7,13 @@ const onConnect = (params) => console.log("handle onConnect", params);
 const BoundingBox = ({ data }) => {
   return (
     <div className="boundingBox">
+      <div>Diamond</div>
+      <div>Unifier</div>
+      <div>P6</div>
+      <div>SQL</div>
       <div>FTP</div>
+      <div>CSV</div>
+      <div>Email</div>
 
       <Handle
         onConnect={onConnect}

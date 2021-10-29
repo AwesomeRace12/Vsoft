@@ -9,7 +9,7 @@
   padding: 15px 10px;
   font-size: 12px;
   text-decoration-color: #eee;
-  background: #D3D3D3;
+  background: #d5f1f1;
   color:black;
   text-align: center;
 }
@@ -63,7 +63,14 @@
   background: #10033f;
   border-color: #10033f;
 }
-
+.dndflow .dndnode.UNI{
+  background: rgb(105, 35, 35);
+  width: 100px;
+  height: 10;
+  color:white;
+  border-color: black;
+  stroke: green;
+}
 
 .dndflow .dndnode.FTP {
   background: blue;
@@ -71,6 +78,52 @@
   color:white;
   border-color: black;
   stroke: green;
+}
+.dndflow .dndnode.P6 {
+  background: rgb(247, 206, 159);
+  width: 100px;
+  color:white;
+  border-color: black;
+  stroke: green;
+}
+.dndflow .dndnode.SQL {
+  background: rgb(250, 23, 23);
+  width: 100px;
+  color:white;
+  border-color: black;
+  stroke: green;
+}
+.dndflow .dndnode.CSV{
+  background: rgb(255, 238, 82);
+  width: 100px;
+  color:white;
+  border-color: black;
+  stroke: green;
+}
+.dndflow .dndnode.Email{
+  background: rgb(252, 242, 113);
+  width: 100px;
+  color:white;
+  border-color: black;
+  stroke: green;
+}
+.dndflow .dndnode.diamond{
+  width: 40px; 
+   height: 40px; 
+   background: #61f832;
+   margin-left: 60px;
+   /* Rotate */
+   -webkit-transform: rotate(-45deg);
+   -moz-transform: rotate(-45deg);
+   -ms-transform: rotate(-45deg);
+   -o-transform: rotate(-45deg);
+   transform: rotate(-45deg);
+   /* Rotate Origin */
+   -webkit-transform-origin: 0 100%;
+   -moz-transform-origin: 0 100%;
+   -ms-transform-origin: 0 100%;
+   -o-transform-origin: 0 100%;
+   transform-origin: 0 100%;
 }
 
 .dndflow .reactflow-wrapper {

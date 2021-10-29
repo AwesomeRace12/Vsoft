@@ -14,11 +14,47 @@ export default () => {
         You can drag these nodes to the pane on the right. Delete nodes using
         'Backspace'.
       </div>
+      <div className="dndnode UNI"
+        onDragStart={(event) => onDragStart(event, "Unifier")}
+        draggable
+      >
+        Unifier
+      </div>
+      <div className="dndnode diamond"
+        onDragStart={(event) => onDragStart(event, "diamond")}
+        draggable
+      >
+        
+      </div>
+      <div className="dndnode P6"
+        onDragStart={(event) => onDragStart(event, "P6")}
+        draggable
+      >
+        P6
+      </div>
+      <div className="dndnode SQL"
+        onDragStart={(event) => onDragStart(event, "SQL")}
+        draggable
+      >
+        SQL
+      </div>
       <div className="dndnode FTP"
         onDragStart={(event) => onDragStart(event, "FTP")}
         draggable
       >
         FTP
+      </div>
+      <div className="dndnode CSV"
+        onDragStart={(event) => onDragStart(event, "CSV")}
+        draggable
+      >
+        CSV
+      </div>
+      <div className="dndnode Email"
+        onDragStart={(event) => onDragStart(event, "Email")}
+        draggable
+      >
+        Email
       </div>
 
       
