@@ -32,9 +32,12 @@ import {
 
 
 const Styles = styled.div`
+  .table-container {
+    height: 350px;
+  }
   table {
     width: 100%;
-    height: 350px;
+    overflow-y: scroll;
     border-spacing: 0;
     border: 1px solid white;
     tr:nth-child(odd) {
@@ -69,6 +72,8 @@ const Styles = styled.div`
       border-bottom: 3px solid white;
       color: white;
       font-weight: bold;
+      position: sticky;
+      top: 0;
     }
   }
   .pagination {
@@ -76,6 +81,7 @@ const Styles = styled.div`
     padding: 0.5rem;
     color: white;
     background: #384275;
+    bottom: 0;
   }
 `;
 const IndeterminateCheckbox = React.forwardRef(
@@ -98,7 +104,7 @@ setPrefix('');
 export default function LivePreviewExample() {
   const history = useHistory();
   //data from axios get
-  /*const [data, setData] = useState([]);
+  const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
       axios
@@ -110,9 +116,9 @@ export default function LivePreviewExample() {
           console.log(err);
         });
     })();
-  }, []);*/
+  }, []);
   //hard coded data
-  const data = React.useMemo(
+  /*const data = React.useMemo(
     () => [
       {
         id: '1',
@@ -236,7 +242,7 @@ export default function LivePreviewExample() {
       }
     ],
     []
-  );
+  );*/
   const columns = React.useMemo(
     () => [
       {
@@ -320,7 +326,7 @@ export default function LivePreviewExample() {
       axios
         .post('http://localhost:8080/processData/insertProcess', newProcess)
         .then(res => {
-          //setData(res.data);
+          setData(res.data);
           console.log(newProcess);
         })
         .catch(err => {
@@ -547,7 +553,7 @@ export default function LivePreviewExample() {
         </Dialog>
       </Box>
       <Styles>
-        <TableContainer className="mb-4" component={Paper}>
+        <TableContainer className="table-container" component={Paper}>
           <Table striped="true" {...getTableProps()} aria-label="simple table">
             <TableHead>
               {headerGroups.map(headerGroup => (
@@ -600,7 +606,7 @@ export default function LivePreviewExample() {
             <span>
               Page <strong>{pageIndex + 1}</strong>{' '}
             </span>{' '}
-            <span> Showing {pageSize} records</span>
+            <span> Showing {pageSize} records each page</span>
           </div>
         </TableContainer>
       </Styles>
