@@ -67,6 +67,7 @@ export default function App() {
   return (
     <div className="dndflow">
       <ReactFlowProvider>
+      <Sidebar />
         <div
           className="reactflow-wrapper"
           style={{ height: '500px', width: '500px' }}
@@ -82,7 +83,6 @@ export default function App() {
             <Controls />
           </ReactFlow>
         </div>
-        <Sidebar />
       </ReactFlowProvider>
     </div>
   );
