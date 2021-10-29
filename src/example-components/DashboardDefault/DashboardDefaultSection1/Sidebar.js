@@ -3,8 +3,10 @@ import React from 'react';
 export default () => {
   const onDragStart = (event, nodeType) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
+
     event.dataTransfer.setData("nodeName", event.target.firstChild.nodeValue);
     event.dataTransfer.setData("className", event.target.className);
+
     event.dataTransfer.effectAllowed = 'move';
   };
 
