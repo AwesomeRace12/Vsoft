@@ -3,7 +3,7 @@ import React, { Fragment, useEffect, useState } from 'react';
 import 'reactjs-popup/dist/index.css';
 //import history from './../../../history';
 //import { Router, Route, Link } from 'react-router-dom';
-import { useTable, usePagination } from 'react-table';
+import { useTable, usePagination, useRowSelect } from 'react-table';
 //import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import axios from 'axios';
@@ -16,21 +16,25 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   TableBody,
   TableCell,
-  TableContainer,
   TableHead,
   TableRow,
+  TableContainer,
   Paper,
-  Table,
   Button,
   Box,
+  Table,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle
 } from '@material-ui/core';
+
+
 const Styles = styled.div`
   table {
+    width: 100%;
+    height: 350px;
     border-spacing: 0;
     border: 1px solid white;
     tr:nth-child(odd) {
@@ -68,95 +72,33 @@ const Styles = styled.div`
     }
   }
   .pagination {
+    position: sticky;
     padding: 0.5rem;
     color: white;
     background: #384275;
   }
 `;
-setPrefix();
-function Table1({ columns, data }) {
-  const {
-    getTableProps,
-    getTableBodyProps,
-    headerGroups,
-    prepareRow,
-    page,
-    canPreviousPage,
-    canNextPage,
-    pageCount,
-    nextPage,
-    previousPage,
-    gotoPage,
-    state: { pageIndex, pageSize }
-  } = useTable(
-    {
-      columns,
-      data,
-      initialState: { pageIndex: 0, pageSize: 20 }
-    },
-    usePagination
-  );
-  return (
-    <TableContainer className="mb-4" component={Paper}>
-      <Table striped {...getTableProps()} aria-label="simple table">
-        <TableHead>
-          {headerGroups.map(headerGroup => (
-            <tr {...headerGroup.getHeaderGroupProps()}>
-              {headerGroup.headers.map(column => (
-                <th
-                  {...column.getHeaderProps({
-                    style: { width: column.width }
-                  })}>
-                  {column.render('Header')}
-                </th>
-              ))}
-            </tr>
-          ))}
-        </TableHead>
-        <TableBody {...getTableBodyProps()}>
-          {page.map((row, i) => {
-            prepareRow(row);
-            return (
-              <TableRow {...row.getRowProps()}>
-                {row.cells.map(cell => {
-                  return (
-                    <TableCell {...cell.getCellProps()}>
-                      {cell.render('Cell')}
-                    </TableCell>
-                  );
-                })}
-              </TableRow>
-            );
-          })}
-        </TableBody>
-      </Table>
-      <div className="pagination">
-        <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
-          {'<<'}
-        </button>{' '}
-        <button onClick={() => previousPage()} disabled={!canPreviousPage}>
-          {'<'}
-        </button>{' '}
-        <button onClick={() => nextPage()} disabled={!canNextPage}>
-          {'>'}
-        </button>{' '}
-        <button onClick={() => gotoPage(pageCount - 1)} disabled={!canNextPage}>
-          {'>>'}
-        </button>{' '}
-        <span>
-          Page <strong>{pageIndex + 1}</strong>{' '}
-        </span>{' '}
-        <span> Showing {pageSize} records</span>
-      </div>
-    </TableContainer>
-  );
-}
+const IndeterminateCheckbox = React.forwardRef(
+  ({ indeterminate, ...rest }, ref) => {
+    const defaultRef = React.useRef();
+    const resolvedRef = ref || defaultRef;
 
-//setPrefix('');
+    React.useEffect(() => {
+      resolvedRef.current.indeterminate = indeterminate;
+    }, [resolvedRef, indeterminate]);
+
+    return (
+      <>
+        <input type="checkbox" ref={resolvedRef} {...rest} />
+      </>
+    );
+  }
+);
+setPrefix('');
 export default function LivePreviewExample() {
   const history = useHistory();
   //data from axios get
-  const [data, setData] = useState([]);
+  /*const [data, setData] = useState([]);
   useEffect(() => {
     (async () => {
       axios
@@ -168,9 +110,9 @@ export default function LivePreviewExample() {
           console.log(err);
         });
     })();
-  }, []);
+  }, []);*/
   //hard coded data
-  /*const data = React.useMemo(
+  const data = React.useMemo(
     () => [
       {
         id: '1',
@@ -207,10 +149,94 @@ export default function LivePreviewExample() {
         name: 'E-5',
         description: 'SAP',
         status: 'active'
+      },
+      {
+        id: '7',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '8',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '9',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '10',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '11',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '12',
+        name: 'E-5',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '13',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '14',
+        name: 'E-5',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '15',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '16',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '9',
+        name: 'E-3',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '10',
+        name: 'E-1',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '11',
+        name: 'E-2',
+        description: 'SAP',
+        status: 'active'
+      },
+      {
+        id: '12',
+        name: 'E-5',
+        description: 'SAP',
+        status: 'active'
       }
     ],
     []
-  );*/
+  );
   const columns = React.useMemo(
     () => [
       {
@@ -233,6 +259,30 @@ export default function LivePreviewExample() {
       }
     ],
     []
+  );
+
+  const {
+    getTableProps,
+    getTableBodyProps,
+    headerGroups,
+    prepareRow,
+    page,
+    canPreviousPage,
+    canNextPage,
+    pageCount,
+    nextPage,
+    previousPage,
+    gotoPage,
+    selectedFlatRows,
+    state: { pageIndex, pageSize, selectedRowIds}
+  } = useTable(
+    {
+      columns,
+      data,
+      initialState: { pageIndex: 0, pageSize: 20 }
+    },
+    usePagination,
+    useRowSelect
   );
 
   const [open, setOpen] = useState(false);
@@ -270,7 +320,7 @@ export default function LivePreviewExample() {
       axios
         .post('http://localhost:8080/processData/insertProcess', newProcess)
         .then(res => {
-          setData(res.data);
+          //setData(res.data);
           console.log(newProcess);
         })
         .catch(err => {
@@ -290,7 +340,7 @@ export default function LivePreviewExample() {
   const [toDelete, setDelete] = useState(false);
   const closeDelete = () => setDelete(false);
   const [deleteFormID, setDeleteFormID] = useState({ id: '' });
-  
+
   const handleDeleteFormChange = event => {
     event.preventDefault();
     const fieldID = event.target.getAttribute('name');
@@ -304,20 +354,21 @@ export default function LivePreviewExample() {
     event.preventDefault();
     (async () => {
       axios
-        .delete('http://localhost:8080/processData/insertProcess', deleteFormID)
+        .delete('http://localhost:8080/processData/delete', deleteFormID)
         .then(console.log(deleteFormID))
         .catch(err => {
           console.log(err);
         });
     })();
     closeDelete();
+    history.go(0);
   };
 
   return (
     <Fragment>
       <Box className="d-flex align-items-center">
         <Button
-          size="large"
+          size="medium"
           className="m-2 btn"
           style={{ color: 'red', fontWeight: 'bold', float: 'left' }}
           onClick={() => setOpen(o => !o)}>
@@ -335,7 +386,7 @@ export default function LivePreviewExample() {
           New
         </Button>
         <Button
-          size="large"
+          size="medium"
           className="m-2 btn"
           style={{ color: 'grey', fontWeight: 'bold', float: 'right' }}
           onClick={() => setEdit(o => !o)}>
@@ -353,7 +404,7 @@ export default function LivePreviewExample() {
           Edit
         </Button>
         <Button
-          size="large"
+          size="medium"
           style={{ color: 'red', fontWeight: 'bold', float: 'left' }}
           onClick={() => setDelete(o => !o)}>
           <span
@@ -471,6 +522,7 @@ export default function LivePreviewExample() {
                   onChange={handleDeleteFormChange}
                 />
               </form>
+              <br />
               <span>Are you sure you want to delete?</span>
             </DialogContentText>
           </DialogContent>
@@ -495,7 +547,62 @@ export default function LivePreviewExample() {
         </Dialog>
       </Box>
       <Styles>
-        <Table1 columns={columns} data={data} />
+        <TableContainer className="mb-4" component={Paper}>
+          <Table striped="true" {...getTableProps()} aria-label="simple table">
+            <TableHead>
+              {headerGroups.map(headerGroup => (
+                <tr {...headerGroup.getHeaderGroupProps()}>
+                  {headerGroup.headers.map(column => (
+                    <th
+                      {...column.getHeaderProps({
+                        style: { width: column.width }
+                      })}>
+                      {column.render('Header')}
+                    </th>
+                  ))}
+                </tr>
+              ))}
+            </TableHead>
+            <TableBody {...getTableBodyProps()}>
+              {page.map((row, i) => {
+                prepareRow(row);
+                return (
+                  <TableRow
+                    {...row.getRowProps()}
+                    onClick={() => console.log(data[row.id])}>
+                    {row.cells.map(cell => {
+                      return (
+                        <TableCell {...cell.getCellProps()}>
+                          {cell.render('Cell')}
+                        </TableCell>
+                      );
+                    })}
+                  </TableRow>
+                );
+              })}
+            </TableBody>
+          </Table>
+          <div className="pagination">
+            <button onClick={() => gotoPage(0)} disabled={!canPreviousPage}>
+              {'<<'}
+            </button>{' '}
+            <button onClick={() => previousPage()} disabled={!canPreviousPage}>
+              {'<'}
+            </button>{' '}
+            <button onClick={() => nextPage()} disabled={!canNextPage}>
+              {'>'}
+            </button>{' '}
+            <button
+              onClick={() => gotoPage(pageCount - 1)}
+              disabled={!canNextPage}>
+              {'>>'}
+            </button>{' '}
+            <span>
+              Page <strong>{pageIndex + 1}</strong>{' '}
+            </span>{' '}
+            <span> Showing {pageSize} records</span>
+          </div>
+        </TableContainer>
       </Styles>
     </Fragment>
   );
