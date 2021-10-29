@@ -17,14 +17,14 @@ const initialElements = [
     className: 'dndnode input',
     data: { label: 'Start' },
 
-    position: { x: 250, y: 5 }
+    position: { x: 50, y: 20 }
   },
   {
     id: '2',
     className: 'dndnode output',
     type: 'output',
     data: { label: 'End' },
-    position: { x: 500, y: 10 }
+    position: { x: 800, y: 300 }
   }
 ];
 let id = 0;
