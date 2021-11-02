@@ -24,7 +24,7 @@ export default () => {
         onDragStart={(event) => onDragStart(event, "diamond")}
         draggable
       >
-        
+        D
       </div>
       <div className="dndnode P6"
         onDragStart={(event) => onDragStart(event, "P6")}
