@@ -18,9 +18,7 @@ import CSV from "./CSV";
 import Email from "./Email";
 import Sidebar from "./Sidebar";
 
-import './styles.css';
-import FTP from './Ftp';
-import Sidebar from './Sidebar';
+
 
 const initialElements = [
   {
