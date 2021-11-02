@@ -6,8 +6,16 @@ import ReactFlow, {
   Controls
 } from "react-flow-renderer";
 
+
+import Arrow, { DIRECTION } from 'react-arrows'
+
 import "./styles.css";
+import Unifier from "./Unifier";
+import P6 from "./P6";
+import SQL from "./SQL";
 import FTP from "./Ftp";
+import CSV from "./CSV";
+import Email from "./Email";
 import Sidebar from "./Sidebar";
 
 
@@ -72,9 +80,10 @@ export default function App() {
     setElements((es) => es.concat(newNode));
   };
   return (
-    <div className="dndflow">
+    
+    <><div className="dndflow">
       <ReactFlowProvider>
-      <Sidebar />
+        <Sidebar />
         <div
           className="reactflow-wrapper"
           style={{ height: "500px", width: "500px" }}
@@ -94,5 +103,11 @@ export default function App() {
         </div>
       </ReactFlowProvider>
     </div>
+    <div classname='arrow'>
+
+      </div>
+      </>
+    
+    
   );
 }
