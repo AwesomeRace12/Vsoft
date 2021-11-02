@@ -1,13 +1,13 @@
-import React, { Fragment, useState } from 'react';
-
+import React, { Fragment, useState, useEffect } from 'react';
+import axios from 'axios';
 import clsx from 'clsx';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import Popup from 'reactjs-popup';
 import { Hidden, IconButton, AppBar, Box, Button } from '@material-ui/core';
-import { useHistory } from 'react-router-dom';
+import { useHistory, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
-
+import nextId, { setPrefix } from 'react-id-generator';
 import { setSidebarToggleMobile } from '../../reducers/ThemeOptions';
 import projectLogo from '../../assets/images/react.svg';
 
@@ -16,15 +16,33 @@ import HeaderLogo from '../../layout-components/HeaderLogo';
 
 //import MenuOpenRoundedIcon from '@material-ui/icons/MenuOpenRounded';
 //import MenuRoundedIcon from '@material-ui/icons/MenuRounded';
+setPrefix('');
 const contentStyle = {
   width: '100%',
-  height: '75%'
+  height: '70%'
 };
 const Header = props => {
   const { headerShadow, headerFixed } = props;
   const history = useHistory();
-  const [open, setOpen] = useState(false);
-  const closeModal = () => setOpen(false);
+
+  const [toggle, setToggle] = useState(true);
+  const changeButton = () => {
+    setToggle(!toggle);
+  };
+  const doSave = () => {
+    setToggle(!toggle);
+    history.push('/RegularTables1', {
+      from: 'LivePreviewExample'
+    });
+  };
+  const doCancel = () => {
+    setToggle(!toggle);
+    history.push('/RegularTables1', {
+      from: 'LivePreviewExample'
+    });
+  };
+  const location = useLocation();
+
   return (
     <Fragment>
       <AppBar
@@ -58,62 +76,36 @@ const Header = props => {
           </Hidden>
           <Box className="d-flex align-items-center">
             <div>
-              <Button
-                size="x-large"
-                className="m-2 btn"
-                style={{ color: 'red', fontWeight: 'bold'}}
-                onClick={() => setOpen(o => !o)}>
-                <span
-                  className="btn-wrapper--icon"
-                  style={{
-                    padding: '20%',
-                    float: 'right',
-                    background: 'white',
-                    color: 'red',
-                    borderRadius: '50%'
-                  }}>
-                  <FontAwesomeIcon icon={['fas', 'plus']} />
-                </span>
-                New
-              </Button>
-              <Popup
-                modal
-                open={open}
-                closeOnDocumentClick
-                onClose={closeModal}
-                contentStyle={contentStyle}>
-                <form>
-                  <input type="text" name="name" placeholder="Enter a name" />
-                  <br />
-                  <textarea
-                    rows="10"
-                    cols="100"
-                    name="description"
-                    placeholder="Enter a description"
-                  />
-                  <br />
+              {location.pathname === '/DashboardDefault' ? (
+                <>
                   <Button
-                    onClick={() =>
-                      history.push('/DashboardDefault', {
-                        from: 'LivePreviewExample'
-                      })
-                    }
-                    type="submit"
+                    onClick={doSave}
+                    type="default"
                     size="small"
-                    color="primary"
+                    style={{
+                      float: 'right',
+                      color: 'white',
+                      background: 'purple'
+                    }}
                     variant="contained">
-                    Create
+                    Save
                   </Button>
                   <Button
-                    type="button"
+                    onClick={doCancel}
+                    type="default"
                     size="small"
-                    color="primary"
-                    variant="contained"
-                    onClick={closeModal}>
+                    style={{
+                      float: 'right',
+                      color: 'white',
+                      background: 'purple'
+                    }}
+                    variant="contained">
                     Cancel
                   </Button>
-                </form>
-              </Popup>
+                </>
+              ) : (
+                <></>
+              )}
             </div>
           </Box>
         </Box>

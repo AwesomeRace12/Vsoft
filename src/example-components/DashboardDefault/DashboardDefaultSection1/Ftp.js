@@ -4,12 +4,15 @@ import { Handle, Position } from "react-flow-renderer";
 import "./styles.css";
 const onConnect = (params) => console.log("handle onConnect", params);
 
+
 const BoundingBox = ({ data }) => {
   return (
     <div className="boundingBox">
+
       <div>Diamond</div>
       <div>FTP</div>
       
+
 
       <Handle
         onConnect={onConnect}
@@ -28,5 +31,6 @@ const BoundingBox = ({ data }) => {
     </div>
   );
 };
+
 
 export default memo(BoundingBox);
