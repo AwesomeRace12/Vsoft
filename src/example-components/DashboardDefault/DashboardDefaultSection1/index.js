@@ -3,22 +3,21 @@ import ReactFlow, {
   ReactFlowProvider,
   addEdge,
   removeElements,
-  Controls
-} from "react-flow-renderer";
+  Controls,
+  StepEdge
+} from 'react-flow-renderer';
 
+import Arrow, { DIRECTION } from 'react-arrows';
 
-import Arrow, { DIRECTION } from 'react-arrows'
-
-import "./styles.css";
-import Unifier from "./Unifier";
-import P6 from "./P6";
-import SQL from "./SQL";
-import FTP from "./Ftp";
-import CSV from "./CSV";
-import Email from "./Email";
-import Sidebar from "./Sidebar";
-
-
+import './styles.css';
+import Unifier from './Unifier';
+import P6 from './P6';
+import SQL from './SQL';
+import FTP from './Ftp';
+import CSV from './CSV';
+import Email from './Email';
+import Sidebar from './Sidebar';
+import ArrowEdge from './ArrowEdge';
 
 const initialElements = [
   {
@@ -44,10 +43,26 @@ export default function App() {
   const nodeTypes = {
     mirror: FTP
   };
+  const edgeTypes = {
+    custom: ArrowEdge
+  };
   const reactFlowWrapper = useRef(null);
   const [reactFlowInstance, setReactFlowInstance] = useState(null);
   const [elements, setElements] = useState(initialElements);
-  const onConnect = params => setElements(els => addEdge(params, els));
+  const onConnect = params =>
+    setElements(els =>
+      addEdge(
+        {
+          ...params,
+          animated: false,
+          sourceX: 10,
+          sourceY: 10,
+          style: { stroke: 'red', strokeWidth: '2px' },
+          arrowHeadType: 'arrowclosed'
+        },
+        els
+      )
+    );
   const onElementsRemove = elementsToRemove =>
     setElements(els => removeElements(elementsToRemove, els));
   const onLoad = _reactFlowInstance => setReactFlowInstance(_reactFlowInstance);
@@ -75,32 +90,29 @@ export default function App() {
     setElements(es => es.concat(newNode));
   };
   return (
-    
-    <><div className="dndflow">
-      <ReactFlowProvider>
-        <Sidebar />
-        <div
-          className="reactflow-wrapper"
-          style={{ height: '500px', width: '500px' }}
-          ref={reactFlowWrapper}>
-          <ReactFlow
-            elements={elements}
-            onConnect={onConnect}
-            nodeTypes={nodeTypes}
-            onElementsRemove={onElementsRemove}
-            onLoad={onLoad}
-            onDrop={onDrop}
-            onDragOver={onDragOver}>
-            <Controls />
-          </ReactFlow>
-        </div>
-      </ReactFlowProvider>
-    </div>
-    <div classname='arrow'>
-
+    <>
+      <div className="dndflow">
+        <ReactFlowProvider>
+          <Sidebar />
+          <div
+            className="reactflow-wrapper"
+            style={{ height: '500px', width: '500px' }}
+            ref={reactFlowWrapper}>
+            <ReactFlow
+              elements={elements}
+              onConnect={onConnect}
+              nodeTypes={nodeTypes}
+              onElementsRemove={onElementsRemove}
+              onLoad={onLoad}
+              onDrop={onDrop}
+              onDragOver={onDragOver}
+              edgeTypes={edgeTypes}>
+              <Controls />
+            </ReactFlow>
+          </div>
+        </ReactFlowProvider>
       </div>
-      </>
-    
-    
+      <div className="arrow"></div>
+    </>
   );
 }
