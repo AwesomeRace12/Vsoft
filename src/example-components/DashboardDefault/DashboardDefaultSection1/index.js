@@ -7,7 +7,6 @@ import ReactFlow, {
   StepEdge
 } from 'react-flow-renderer';
 
-import Arrow, { DIRECTION } from 'react-arrows';
 
 import './styles.css';
 import Unifier from './Unifier';
@@ -25,7 +24,7 @@ const initialElements = [
     type: 'input',
     className: 'dndnode input',
     data: { label: 'Start' },
-
+    sourcePosition: 'right',
     position: { x: 50, y: 20 }
   },
   {
@@ -33,6 +32,7 @@ const initialElements = [
     className: 'dndnode output',
     type: 'output',
     data: { label: 'End' },
+    targetPosition: 'left',
     position: { x: 800, y: 300 }
   }
 ];
@@ -58,7 +58,8 @@ export default function App() {
           sourceX: 10,
           sourceY: 10,
           style: { stroke: 'red', strokeWidth: '2px' },
-          arrowHeadType: 'arrowclosed'
+          arrowHeadType: 'arrowclosed',
+          type: 'step'
         },
         els
       )

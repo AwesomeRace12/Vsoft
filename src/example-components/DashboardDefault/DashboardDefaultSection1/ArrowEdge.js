@@ -1,5 +1,5 @@
 import React from 'react';
-import { getBezierPath, getMarkerEnd } from 'react-flow-renderer';
+import { getBezierPath, getMarkerEnd, getSmoothStepPath } from 'react-flow-renderer';
 export default function ArrowEdge({
   id,
   sourceX,
@@ -13,7 +13,7 @@ export default function ArrowEdge({
   arrowHeadType,
   markerEndId
 }) {
-  const edgePath = getBezierPath({
+  const edgePath = getSmoothStepPath({
     sourceX,
     sourceY,
     sourcePosition,
