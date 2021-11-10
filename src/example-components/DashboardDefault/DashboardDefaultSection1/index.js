@@ -6,7 +6,15 @@ import ReactFlow, {
   Controls,
   StepEdge
 } from 'react-flow-renderer';
-
+import {
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  Button
+} from '@material-ui/core';
+import Popup from 'reactjs-popup';
 
 import './styles.css';
 import Unifier from './Unifier';
@@ -25,19 +33,23 @@ const initialElements = [
     className: 'dndnode input',
     data: { label: 'Start' },
     sourcePosition: 'right',
-    position: { x: 50, y: 20 }
+    position: { x: 50, y: 20 },
+    parent: null,
+    child: null
   },
   {
     id: '2',
-    className: 'dndnode output',
     type: 'output',
+    className: 'dndnode output',
     data: { label: 'End' },
     targetPosition: 'left',
-    position: { x: 800, y: 300 }
+    position: { x: 800, y: 300 },
+    parent: null,
+    child: null
   }
 ];
-let id = 0;
-const getId = () => `dndnode_${id++}`;
+let id = 3;
+const getId = () => `${id++}`;
 
 export default function App() {
   const nodeTypes = {
@@ -81,14 +93,28 @@ export default function App() {
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top
     });
+    const parent = null;
+    const child = null;
     const newNode = {
       id: getId(),
       type,
-      position,
       className: className,
-      data: { label: name }
+      data: { label: name },
+      position,
+      parent,
+      child
     };
     setElements(es => es.concat(newNode));
+  };
+  const [open, setOpen] = useState(false);
+  const closeModal = () => setOpen(false);
+  const [thisElement, setThisElement] = useState([]);
+  const onElementClick = (event, element) => {
+    setOpen(true);
+    setThisElement(element);
+  };
+  const onSave = () => {
+    console.log(elements);
   };
   return (
     <>
@@ -104,11 +130,38 @@ export default function App() {
               onConnect={onConnect}
               nodeTypes={nodeTypes}
               onElementsRemove={onElementsRemove}
+              onElementClick={onElementClick}
               onLoad={onLoad}
               onDrop={onDrop}
               onDragOver={onDragOver}
               edgeTypes={edgeTypes}>
               <Controls />
+              <Dialog open={open} onClose={closeModal}>
+                <DialogTitle>
+                  Type: {thisElement.type} <br /> ID: {thisElement.id}
+                </DialogTitle>
+                <DialogContent>
+                  <DialogContentText>{thisElement.type}</DialogContentText>
+                </DialogContent>
+                <DialogActions>
+                  <Button
+                    type="submit"
+                    size="small"
+                    color="primary"
+                    variant="contained"
+                    onClick={onSave}>
+                    Save
+                  </Button>
+                  <Button
+                    type="button"
+                    size="small"
+                    color="primary"
+                    variant="contained"
+                    onClick={closeModal}>
+                    Cancel
+                  </Button>
+                </DialogActions>
+              </Dialog>
             </ReactFlow>
           </div>
         </ReactFlowProvider>
