@@ -80,7 +80,7 @@
   border-color: #10033f;
 }
 .dndflow .dndnode.UNI{
-  background: rgb(105, 35, 35);
+  background: rgb(179, 21, 21);
   width: 100px;
   height: 10;
   color:white;
@@ -127,7 +127,7 @@
   width: 40px; 
    height: 40px; 
    background: #61f832;
-   margin-left: 60px;
+   color: #61f832;
    /* Rotate */
    -webkit-transform: rotate(-45deg);
    -moz-transform: rotate(-45deg);

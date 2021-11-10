@@ -15,7 +15,7 @@ import {
   Button
 } from '@material-ui/core';
 import Popup from 'reactjs-popup';
-
+import { useHistory, useLocation } from 'react-router-dom';
 import './styles.css';
 import Unifier from './Unifier';
 import P6 from './P6';
@@ -52,6 +52,7 @@ let id = 3;
 const getId = () => `${id++}`;
 
 export default function App() {
+  const history = useHistory();
   const nodeTypes = {
     mirror: FTP
   };
@@ -95,16 +96,123 @@ export default function App() {
     });
     const parent = null;
     const child = null;
-    const newNode = {
-      id: getId(),
-      type,
-      className: className,
-      data: { label: name },
-      position,
-      parent,
-      child
-    };
-    setElements(es => es.concat(newNode));
+    const description = '';
+    const server = '';
+    const action = '';
+    const directoryIn = '';
+    const directoryOut = '';
+    const fileName = '';
+    const sqlType = '';
+    const sqlText = '';
+    const tableName = '';
+    const primaryKey = '';
+    if (type === 'FTP') {
+      const newNode = {
+        id: getId(),
+        type,
+        className: className,
+        data: { label: name },
+        position,
+        parent,
+        child,
+        description,
+        server,
+        action,
+        directoryIn,
+        directoryOut,
+        fileName
+      };
+      setElements(es => es.concat(newNode));
+    }
+    if (type === 'diamond') {
+      const newNode = {
+        id: getId(),
+        type,
+        className: className,
+        data: { label: name },
+        position,
+        parent,
+        child,
+        description,
+        server,
+        sqlType,
+        sqlText
+      };
+      setElements(es => es.concat(newNode));
+    }
+    if (type === 'SQL') {
+      const newNode = {
+        id: getId(),
+        type,
+        className: className,
+        data: { label: name },
+        position,
+        parent,
+        child,
+        description,
+        server,
+        sqlType,
+        sqlText
+      };
+      setElements(es => es.concat(newNode));
+    }
+    if (type === 'CSV') {
+      const newNode = {
+        id: getId(),
+        type,
+        className: className,
+        data: { label: name },
+        position,
+        parent,
+        child,
+        description,
+        server,
+        action,
+        fileName,
+        tableName,
+        primaryKey
+      };
+      setElements(es => es.concat(newNode));
+    }
+    if (type === 'Unifier') {
+      const newNode = {
+        id: getId(),
+        type,
+        className: className,
+        data: { label: name },
+        position,
+        parent,
+        child,
+        description
+      };
+      setElements(es => es.concat(newNode));
+    }
+    if (type === 'P6') {
+      const newNode = {
+        id: getId(),
+        type,
+        className: className,
+        data: { label: name },
+        position,
+        parent,
+        child,
+        description
+      };
+      setElements(es => es.concat(newNode));
+    }
+    if (type === 'Email') {
+      const newNode = {
+        id: getId(),
+        type,
+        className: className,
+        data: { label: name },
+        position,
+        parent,
+        child,
+        description
+      };
+      setElements(es => es.concat(newNode));
+    }
   };
   const [open, setOpen] = useState(false);
   const closeModal = () => setOpen(false);
@@ -112,12 +220,46 @@ export default function App() {
   const onElementClick = (event, element) => {
     setOpen(true);
     setThisElement(element);
+    console.log(elements);
   };
   const onSave = () => {
     console.log(elements);
   };
+  const doSave = () => {
+    console.log(elements);
+  };
+  const doCancel = () => {
+    history.push('/RegularTables1', {
+      from: 'App'
+    });
+  };
+
   return (
     <>
+      <Button
+        onClick={doSave}
+        type="default"
+        size="small"
+        style={{
+          float: 'right',
+          color: 'white',
+          background: 'purple'
+        }}
+        variant="contained">
+        Save
+      </Button>
+      <Button
+        onClick={doCancel}
+        type="default"
+        size="small"
+        style={{
+          float: 'right',
+          color: 'white',
+          background: 'purple'
+        }}
+        variant="contained">
+        Cancel
+      </Button>
       <div className="dndflow">
         <ReactFlowProvider>
           <Sidebar />
