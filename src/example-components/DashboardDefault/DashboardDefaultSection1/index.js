@@ -4,7 +4,10 @@ import ReactFlow, {
   addEdge,
   removeElements,
   Controls,
-  StepEdge
+  StepEdge,
+  getOutgoers,
+  getIncomers,
+  isEdge
 } from 'react-flow-renderer';
 import {
   Dialog,
@@ -25,6 +28,7 @@ import CSV from './CSV';
 import Email from './Email';
 import Sidebar from './Sidebar';
 import ArrowEdge from './ArrowEdge';
+import Form from 'react-jsonschema-form';
 
 const initialElements = [
   {
@@ -49,10 +53,18 @@ const initialElements = [
   }
 ];
 let id = 3;
+let sid = 1;
 const getId = () => `${id++}`;
+const getSId = () => `e${sid++}`;
+const schema = {
+  properties: {
+    description: {type: "string", title: "description"},
+  }
+};
 
 export default function App() {
   const history = useHistory();
+  
   const nodeTypes = {
     mirror: FTP
   };
@@ -67,16 +79,18 @@ export default function App() {
       addEdge(
         {
           ...params,
+          id: getSId(),
           animated: false,
           sourceX: 10,
           sourceY: 10,
-          style: { stroke: 'red', strokeWidth: '2px' },
+          style: { stroke: 'red', strokeWidth: '2px', arrowHeadColor: 'red'},
           arrowHeadType: 'arrowclosed',
           type: 'step'
         },
         els
       )
     );
+  
   const onElementsRemove = elementsToRemove =>
     setElements(els => removeElements(elementsToRemove, els));
   const onLoad = _reactFlowInstance => setReactFlowInstance(_reactFlowInstance);
@@ -110,17 +124,21 @@ export default function App() {
       const newNode = {
         id: getId(),
         type,
+        sourcePosition: 'right',
+        targetPosition: 'left',
         className: className,
-        data: { label: name },
+        data: {
+          label: name,
+          description,
+          server: server,
+          action: action,
+          directoryIn: directoryIn,
+          directoryOut: directoryOut,
+          fileName: fileName
+        },
         position,
         parent,
-        child,
-        description,
-        server,
-        action,
-        directoryIn,
-        directoryOut,
-        fileName
+        child
       };
       setElements(es => es.concat(newNode));
     }
@@ -147,6 +165,8 @@ export default function App() {
         className: className,
         data: { label: name },
         position,
+        sourcePosition: 'right',
+        targetPosition: 'left',
         parent,
         child,
         description,
@@ -164,6 +184,8 @@ export default function App() {
         data: { label: name },
         position,
         parent,
+        sourcePosition: 'right',
+        targetPosition: 'left',
         child,
         description,
         server,
@@ -182,6 +204,8 @@ export default function App() {
         data: { label: name },
         position,
         parent,
+        sourcePosition: 'right',
+        targetPosition: 'left',
         child,
         description
       };
@@ -194,6 +218,8 @@ export default function App() {
         className: className,
         data: { label: name },
         position,
+        sourcePosition: 'right',
+        targetPosition: 'left',
         parent,
         child,
         description
@@ -208,6 +234,8 @@ export default function App() {
         data: { label: name },
         position,
         parent,
+        sourcePosition: 'right',
+        targetPosition: 'left',
         child,
         description
       };
@@ -232,6 +260,9 @@ export default function App() {
     history.push('/RegularTables1', {
       from: 'App'
     });
+  };
+  const formData = {
+    description: thisElement.type
   };
 
   return (
@@ -283,7 +314,9 @@ export default function App() {
                   Type: {thisElement.type} <br /> ID: {thisElement.id}
                 </DialogTitle>
                 <DialogContent>
-                  <DialogContentText>{thisElement.type}</DialogContentText>
+                  <DialogContentText>
+                    <Form schema={schema} formData={formData} />
+                  </DialogContentText>
                 </DialogContent>
                 <DialogActions>
                   <Button
