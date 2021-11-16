@@ -1,16 +1,13 @@
 {
-  "name": "carolina-react-admin-dashboard-material-ui-free",
+  "name": "vsoft-usa-iprocess",
   "version": "1.0.0",
-  "title": "Carolina React Admin Dashboard with Material-UI Free",
-  "homepage": "https://demo.uifort.com/carolina-react-admin-dashboard-material-ui-free",
-  "description": "This free React admin template is powered by Material-UI components framework and features a clean and fresh design following Google&#39;s Material Design specifications.",
+  "title": "VSoft USA iProcess",
   "author": {
-    "name": "UiFort.com",
-    "url": "https://uifort.com"
+    "name": "Arnab Khan, Aakarsh Anugu, Luong Luong, Foad Weisy, Jamie Cardoso, Justin Daniel"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/uifort/carolina-react-admin-dashboard-material-ui-free"
+    "url": "https://github.com/khanarnab563/iprocessWorkflow"
   },
   "dependencies": {
     "@emotion/react": "^11.5.0",
