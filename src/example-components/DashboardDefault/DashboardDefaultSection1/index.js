@@ -29,6 +29,7 @@ import Email from './Email';
 import Sidebar from './Sidebar';
 import ArrowEdge from './ArrowEdge';
 import Form from 'react-jsonschema-form';
+import { doSave } from '../../../layout-components/Header';
 
 const initialElements = [
   {
@@ -58,13 +59,14 @@ const getId = () => `${id++}`;
 const getSId = () => `e${sid++}`;
 const schema = {
   properties: {
-    description: {type: "string", title: "description"},
+    description: { type: 'string', title: 'description' }
   }
 };
-
+export const yo = () => {
+  console.log('YOOOOO');
+};
 export default function App() {
   const history = useHistory();
-  
   const nodeTypes = {
     mirror: FTP
   };
@@ -83,14 +85,14 @@ export default function App() {
           animated: false,
           sourceX: 10,
           sourceY: 10,
-          style: { stroke: 'red', strokeWidth: '2px', arrowHeadColor: 'red'},
+          style: { stroke: 'red', strokeWidth: '2px', arrowHeadColor: 'red' },
           arrowHeadType: 'arrowclosed',
           type: 'step'
         },
         els
       )
     );
-  
+
   const onElementsRemove = elementsToRemove =>
     setElements(els => removeElements(elementsToRemove, els));
   const onLoad = _reactFlowInstance => setReactFlowInstance(_reactFlowInstance);
@@ -254,7 +256,20 @@ export default function App() {
     console.log(elements);
   };
   const doSave = () => {
-    console.log(elements);
+    downloadFile();
+  };
+  const downloadFile = async () => {
+    const output = elements;
+    const filename = 'output';
+    const json = JSON.stringify(output);
+    const blob = new Blob([json], { type: 'application/json' });
+    const href = await URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = href;
+    link.download = filename + '.json';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
   };
   const doCancel = () => {
     history.push('/RegularTables1', {

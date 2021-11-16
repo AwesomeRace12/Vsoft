@@ -25,18 +25,15 @@ const Header = props => {
   const { headerShadow, headerFixed } = props;
   const history = useHistory();
 
-  const [toggle, setToggle] = useState(true);
-  const changeButton = () => {
-    setToggle(!toggle);
-  };
+
   const doSave = () => {
-    setToggle(!toggle);
+    
     history.push('/RegularTables1', {
       from: 'LivePreviewExample'
     });
   };
   const doCancel = () => {
-    setToggle(!toggle);
+    
     history.push('/RegularTables1', {
       from: 'LivePreviewExample'
     });
