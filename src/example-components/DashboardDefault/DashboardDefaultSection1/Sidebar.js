@@ -4,8 +4,8 @@ export default () => {
   const onDragStart = (event, nodeType) => {
     event.dataTransfer.setData('application/reactflow', nodeType);
 
-    event.dataTransfer.setData('nodeName', event.target.firstChild.nodeValue);
-    event.dataTransfer.setData('className', event.target.className);
+    event.dataTransfer.setData("nodeName", event.target.firstChild.nodeValue);
+    event.dataTransfer.setData("className", event.target.className);
 
     event.dataTransfer.effectAllowed = 'move';
   };
@@ -16,55 +16,72 @@ export default () => {
         You can drag these nodes to the pane on the right. Delete nodes using
         'Backspace'.
       </div>
-      <div
-        className="dndnode diamond"
-        onDragStart={event => onDragStart(event, 'diamond')}
+      <div className="dndnode UNI"
+        onDragStart={(event) => onDragStart(event, "Unifier")}
         draggable
-        style={{marginLeft:"80px", color:"#61f832"}}>
-        D
-      </div>
-      <div
-        className="dndnode UNI"
-        onDragStart={event => onDragStart(event, 'Unifier')}
-        draggable
-        style={{marginLeft:"30px", marginTop:"10px"}}>
+      >
         Unifier
       </div>
-      <div
-        className="dndnode P6"
-        onDragStart={event => onDragStart(event, 'P6')}
+      <br></br>
+
+        <br></br>
+
+        <div className="dndnode diamond" onDragStart={(event) => onDragStart(event, "Diamond",)}
+          draggable>
+          <p style={{
+              transform: "rotate(315deg)"
+            }}>
+            Diamond
+          </p>
+        </div>
+
+        <br></br>
+
+
+
+
+      <div className="dndnode P6"
+        onDragStart={(event) => onDragStart(event, "P6")}
         draggable
-        style={{marginLeft:"30px", marginTop:"10px"}}>
+      >
         P6
       </div>
-      <div
-        className="dndnode SQL"
-        onDragStart={event => onDragStart(event, 'SQL')}
+
+      <br></br>
+
+      <div className="dndnode SQL"
+        onDragStart={(event) => onDragStart(event, "SQL")}
         draggable
-        style={{marginLeft:"30px", marginTop:"10px"}}>
+      >
         SQL
       </div>
-      <div
-        className="dndnode FTP"
-        onDragStart={event => onDragStart(event, 'FTP')}
+      
+      <br></br>
+
+      <div className="dndnode FTP"
+        onDragStart={(event) => onDragStart(event, "FTP")}
         draggable
-        style={{marginLeft:"30px", marginTop:"10px"}}>
+      >
         FTP
       </div>
-      <div
-        className="dndnode CSV"
-        onDragStart={event => onDragStart(event, 'CSV')}
+      <br></br>
+
+      <div className="dndnode CSV"
+        onDragStart={(event) => onDragStart(event, "CSV")}
         draggable
-        style={{marginLeft:"30px", marginTop:"10px"}}>
+      >
         CSV
       </div>
-      <div
-        className="dndnode Email"
-        onDragStart={event => onDragStart(event, 'Email')}
+      <br></br>
+
+      <div className="dndnode Email"
+        onDragStart={(event) => onDragStart(event, "Email")}
         draggable
-        style={{marginLeft:"30px", marginTop:"10px"}}>
+      >
         Email
       </div>
+
+      
     </aside>
   );
 };

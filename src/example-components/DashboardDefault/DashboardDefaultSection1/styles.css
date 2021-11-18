@@ -36,10 +36,13 @@
 
 }
 .dndflow .dndnode.output {
+  background: #0041d0;
+  width: 10%;
+  height: 40px;
+  color:white;
+  border-color: #0041d0;
+  margin-bottom:-2px;
   border-radius: 50%;
-  color: white;
-  background-color: #0041d0;
-  width: 100px;
 }
 .dndflow .dndnode.input {
   border-radius: 50%;
@@ -78,6 +81,8 @@
   height: 100;
   background: #10033f;
   border-color: #10033f;
+  margin-bottom:-2px;
+
 }
 .dndflow .dndnode.UNI{
   background: rgb(179, 21, 21);
@@ -85,7 +90,8 @@
   height: 10;
   color:white;
   border-color: black;
-  stroke: green;
+  margin-bottom:-2px;
+
 }
 
 .dndflow .dndnode.FTP {
@@ -93,54 +99,53 @@
   width: 100px;
   color:white;
   border-color: black;
-  stroke: green;
+  margin-bottom:-2px;
 }
 .dndflow .dndnode.P6 {
   background: rgb(247, 206, 159);
   width: 100px;
   color:white;
   border-color: black;
-  stroke: green;
+  margin-bottom:-2px;
+
 }
 .dndflow .dndnode.SQL {
   background: rgb(250, 23, 23);
   width: 100px;
   color:white;
   border-color: black;
-  stroke: green;
+  margin-bottom:-2px;
+
 }
 .dndflow .dndnode.CSV{
   background: rgb(255, 238, 82);
   width: 100px;
   color:white;
   border-color: black;
-  stroke: green;
+  margin-bottom:-2px;
+
 }
 .dndflow .dndnode.Email{
   background: rgb(252, 242, 113);
   width: 100px;
   color:white;
   border-color: black;
-  stroke: green;
+  margin-bottom:-2px;
+
 }
-.dndflow .dndnode.diamond{
-  width: 40px; 
-   height: 40px; 
-   background: #61f832;
-   color: #61f832;
-   display: flex;
-   /* Rotate */
-   -webkit-transform: rotate(-45deg);
-   -moz-transform: rotate(-45deg);
-   -ms-transform: rotate(-45deg);
-   -o-transform: rotate(-45deg);
-   transform: rotate(-45deg);
-   /* Rotate Origin */
-   -webkit-transform-origin: 0 100%;
-   -moz-transform-origin: 0 100%;
-   -ms-transform-origin: 0 100%;
-   -o-transform-origin: 0 100%;
-   transform-origin: 0 100%;
+.dndflow .dndnode.diamond {
+  padding: 0px;
+  border: 1px solid black;
+  width: 50px;
+  height: 50px;
+  border-radius: 5%;
+  transform: rotate(45deg);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #61f832;
+  color: #61f832;
+  
 }
 
 .dndflow .reactflow-wrapper {
@@ -150,11 +155,11 @@
 .targetHandleStyle {
   background: "#555";
 }
-.targetHAndleStyle .sourceHandleStyleA {
+.targetHandleStyle .sourceHandleStyleA {
   top: 10;
 }
 
-.targetHAndleStyle .sourceHandleStyleB {
+.targetHandleStyle .sourceHandleStyleB {
   bottom: 10;
 }
 
@@ -175,4 +180,3 @@
     max-width: 250px;
   }
 }
-

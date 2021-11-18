@@ -4,6 +4,8 @@ import ReactFlow, {
   addEdge,
   removeElements,
   Controls,
+  Handle,
+  Position,
   StepEdge,
   getOutgoers,
   getIncomers,
@@ -17,19 +19,16 @@ import {
   DialogTitle,
   Button
 } from '@material-ui/core';
-import Popup from 'reactjs-popup';
 import { useHistory, useLocation } from 'react-router-dom';
 import './styles.css';
-import Unifier from './Unifier';
-import P6 from './P6';
-import SQL from './SQL';
 import FTP from './Ftp';
-import CSV from './CSV';
 import Email from './Email';
 import Sidebar from './Sidebar';
 import ArrowEdge from './ArrowEdge';
 import Form from 'react-jsonschema-form';
 import { doSave } from '../../../layout-components/Header';
+
+const onConnect = params => console.log('handle onConnect', params);
 
 const initialElements = [
   {
@@ -44,10 +43,9 @@ const initialElements = [
   },
   {
     id: '2',
-    type: 'output',
-    className: 'dndnode output',
+    type: 'End',
+    className: 'dndflow dndnode output',
     data: { label: 'End' },
-    targetPosition: 'left',
     position: { x: 800, y: 300 },
     parent: null,
     child: null
@@ -62,13 +60,134 @@ const schema = {
     description: { type: 'string', title: 'description' }
   }
 };
-export const yo = () => {
-  console.log('YOOOOO');
+
+const CustomEndComponent = ({ data }) => {
+  return (
+    <div className="dndflow dndnode output">
+      End
+      <Handle type="target" position={Position.Left} id="a" />
+      <Handle type="target" position={Position.Right} id="b" />
+      <Handle type="target" position={Position.Top} id="c" />
+      <Handle type="target" position={Position.Bottom} id="d" />
+    </div>
+  );
 };
+const CustomDiamondComponent = ({ data }) => {
+  return (
+    <>
+      <div className="dndflow dndnode diamond">
+        <Handle
+          type="source"
+          position="bottom"
+          style={{ left: '0%', borderRadius: 20 }}
+          id="a"
+        />
+        <div style={{ transform: 'rotate(315deg)' }}>Diamond</div>
+        <Handle
+          type="source"
+          position="right"
+          style={{ top: '0%', borderRadius: 20 }}
+          id="b"
+        />
+        <Handle
+          type="source"
+          position="right"
+          style={{ top: '100%', borderRadius: 20 }}
+          id="c"
+        />
+        <Handle
+          type="target"
+          position="left"
+          style={{ top: '0%', borderRadius: 20 }}
+          id="d"
+        />
+      </div>
+    </>
+  );
+};
+
+const customFTPComponent = ({ data }) => {
+  return (
+    <div className="dndflow dndnode FTP">
+      FTP
+      <Handle type="target" position={Position.Left} id="a" />
+      <Handle type="source" position={Position.Right} id="b" />
+      <Handle type="target" position={Position.Top} id="c" />
+      <Handle type="source" position={Position.Bottom} id="d" />
+    </div>
+  );
+};
+
+const CustomUnifierComponent = ({ data }) => {
+  return (
+    <div className="dndflow dndnode UNI">
+      Unifier
+      <Handle type="target" position={Position.Left} id="a" />
+      <Handle type="source" position={Position.Right} id="b" />
+      <Handle type="target" position={Position.Top} id="c" />
+      <Handle type="source" position={Position.Bottom} id="d" />
+    </div>
+  );
+};
+
+const CustomP6Component = ({ data }) => {
+  return (
+    <div className="dndnode P6">
+      P6
+      <Handle type="target" position={Position.Left} id="a" />
+      <Handle type="source" position={Position.Right} id="b" />
+      <Handle type="target" position={Position.Top} id="c" />
+      <Handle type="source" position={Position.Bottom} id="d" />
+    </div>
+  );
+};
+
+const CustomSQLComponent = ({ data }) => {
+  return (
+    <div className="dndnode SQL">
+      SQL
+      <Handle type="target" position={Position.Left} id="a" />
+      <Handle type="source" position={Position.Right} id="b" />
+      <Handle type="target" position={Position.Top} id="c" />
+      <Handle type="source" position={Position.Bottom} id="d" />
+    </div>
+  );
+};
+
+const CustomCSVComponent = ({ data }) => {
+  return (
+    <div className="dndnode CSV">
+      CSV
+      <Handle type="target" position={Position.Left} id="a" />
+      <Handle type="source" position={Position.Right} id="b" />
+      <Handle type="target" position={Position.Top} id="c" />
+      <Handle type="source" position={Position.Bottom} id="d" />
+    </div>
+  );
+};
+const CustomEmailCompnent = ({ data }) => {
+  return (
+    <div className="dndnode Email">
+      Email
+      <Handle type="target" position={Position.Left} id="a" />
+      <Handle type="source" position={Position.Right} id="b" />
+      <Handle type="target" position={Position.Top} id="c" />
+      <Handle type="source" position={Position.Bottom} id="d" />
+    </div>
+  );
+};
+
 export default function App() {
   const history = useHistory();
   const nodeTypes = {
-    mirror: FTP
+    Diamond: CustomDiamondComponent,
+    FTP: customFTPComponent,
+    Unifier: CustomUnifierComponent,
+    P6: CustomP6Component,
+    SQL: CustomSQLComponent,
+    CSV: CustomCSVComponent,
+    Email: CustomEmailCompnent,
+    End: CustomEndComponent
   };
   const edgeTypes = {
     custom: ArrowEdge
@@ -105,7 +224,6 @@ export default function App() {
     const reactFlowBounds = reactFlowWrapper.current.getBoundingClientRect();
     const type = event.dataTransfer.getData('application/reactflow');
     const name = event.dataTransfer.getData('nodeName');
-    const className = event.dataTransfer.getData('className');
     const position = reactFlowInstance.project({
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top
@@ -128,7 +246,6 @@ export default function App() {
         type,
         sourcePosition: 'right',
         targetPosition: 'left',
-        className: className,
         data: {
           label: name,
           description,
@@ -144,11 +261,10 @@ export default function App() {
       };
       setElements(es => es.concat(newNode));
     }
-    if (type === 'diamond') {
+    if (type === 'Diamond') {
       const newNode = {
         id: getId(),
         type,
-        className: className,
         data: { label: name },
         position,
         parent,
@@ -164,7 +280,6 @@ export default function App() {
       const newNode = {
         id: getId(),
         type,
-        className: className,
         data: { label: name },
         position,
         sourcePosition: 'right',
@@ -182,7 +297,6 @@ export default function App() {
       const newNode = {
         id: getId(),
         type,
-        className: className,
         data: { label: name },
         position,
         parent,
@@ -202,7 +316,6 @@ export default function App() {
       const newNode = {
         id: getId(),
         type,
-        className: className,
         data: { label: name },
         position,
         parent,
@@ -217,7 +330,6 @@ export default function App() {
       const newNode = {
         id: getId(),
         type,
-        className: className,
         data: { label: name },
         position,
         sourcePosition: 'right',
@@ -232,7 +344,6 @@ export default function App() {
       const newNode = {
         id: getId(),
         type,
-        className: className,
         data: { label: name },
         position,
         parent,
