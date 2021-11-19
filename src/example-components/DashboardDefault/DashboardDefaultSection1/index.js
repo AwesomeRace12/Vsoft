@@ -1,3 +1,4 @@
+/* eslint-disable no-empty */
 import React, { useState, useRef } from 'react';
 import ReactFlow, {
   ReactFlowProvider,
@@ -6,11 +7,10 @@ import ReactFlow, {
   Controls,
   Handle,
   Position,
-  StepEdge,
   getOutgoers,
   getIncomers,
-  isEdge,
-  ArrowHeadType
+  ArrowHeadType,
+  isNode
 } from 'react-flow-renderer';
 import {
   Dialog,
@@ -38,8 +38,8 @@ const initialElements = [
     data: { label: 'Start' },
     sourcePosition: 'right',
     position: { x: 50, y: 20 },
-    parent: null,
-    child: null
+    parent: [],
+    child: []
   },
   {
     id: '2',
@@ -47,8 +47,8 @@ const initialElements = [
     className: 'dndflow dndnode output',
     data: { label: 'End' },
     position: { x: 800, y: 300 },
-    parent: null,
-    child: null
+    parent: [],
+    child: []
   }
 ];
 let id = 3;
@@ -227,8 +227,8 @@ export default function App() {
       x: event.clientX - reactFlowBounds.left,
       y: event.clientY - reactFlowBounds.top
     });
-    const parent = null;
-    const child = null;
+    const parent = [];
+    const child = [];
     const description = '';
     const server = '';
     const action = '';
@@ -365,9 +365,38 @@ export default function App() {
   const onSave = () => {
     console.log(elements);
   };
-  const doSave = () => {
-    downloadFile();
+  const [saveValid, setSaveValid] = useState(false);
+  const [openError, setOpenError] = useState(false);
+  const closeErrorModal = () => {
+    setOpenError(false);
   };
+  const doSave = () => {
+    for (var i = 0; i < elements.length; i++) {
+      if (isNode(elements[i])) {
+        console.log(elements[i].id);
+        var out = getOutgoers(elements[i], elements);
+        var outMap = out.map((n) => n.id);
+        elements[i].child = outMap;
+        console.log(elements[i].child);
+        var parentIn = getIncomers(elements[i], elements);
+        var inMap = parentIn.map((n) => n.id);
+        elements[i].parent = inMap;
+        console.log(elements[i].parent);
+        if (
+          (i !== 0 && elements[i].parent.length > 0) &&
+          (i !== 1 && elements[i].child.length > 0)
+        ) {
+          setSaveValid(true);
+        }
+      }
+    }
+    if (saveValid) {
+      downloadFile();
+    } else {
+      setOpenError(true);
+    }
+  };
+
   const downloadFile = async () => {
     const output = elements;
     const filename = 'output';
@@ -466,6 +495,26 @@ export default function App() {
                     Cancel
                   </Button>
                 </DialogActions>
+              </Dialog>
+              <Dialog open={openError} close={closeErrorModal}>
+                <DialogTitle>NOT VALID WORKFLOW</DialogTitle>
+                <DialogContent>
+                  <DialogContentText>
+                    Please complete the workflow, ensure Start is connected to
+                    End. Closed system (no gaps). Download will be available
+                    when valid.
+                  </DialogContentText>
+                  <DialogActions>
+                    <Button
+                      type="button"
+                      size="small"
+                      color="primary"
+                      variant="contained"
+                      onClick={closeErrorModal}>
+                      Close
+                    </Button>
+                  </DialogActions>
+                </DialogContent>
               </Dialog>
             </ReactFlow>
           </div>
