@@ -37,7 +37,7 @@
 }
 .dndflow .dndnode.output {
   background: #0041d0;
-  width: 10%;
+  width: 100px;
   height: 40px;
   color:white;
   border-color: #0041d0;
@@ -118,7 +118,7 @@
 
 }
 .dndflow .dndnode.CSV{
-  background: rgb(255, 238, 82);
+  background: rgb(186, 82, 255);
   width: 100px;
   color:white;
   border-color: black;
@@ -126,7 +126,7 @@
 
 }
 .dndflow .dndnode.Email{
-  background: rgb(252, 242, 113);
+  background: rgb(54, 110, 37);
   width: 100px;
   color:white;
   border-color: black;
@@ -168,7 +168,12 @@
   display: flex;
   flex-direction: column;
 }
-
+.description {
+  padding:20px;
+}
+aside .dndnode.diamond {
+  margin-left: 20px;
+}
 
 @media screen and (min-width: 768px) {
   .dndflow {
@@ -176,7 +181,10 @@
   }
 
   .dndflow aside {
-    width: 20%;
-    max-width: 250px;
+    width: 100px;
+    padding:0px;
+    padding-bottom: 80px;
+    height: 100%;
+
   }
 }

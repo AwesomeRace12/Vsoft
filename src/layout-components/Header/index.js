@@ -49,61 +49,10 @@ const Header = props => {
         elevation={headerShadow ? 11 : 3}>
         {!props.isCollapsedLayout && <HeaderLogo />}
         <Box className="app-header-toolbar">
-          <Hidden lgUp>
-            <Box className="app-logo-wrapper">
-              <Link to="/RegularTables1" className="app-logo-link">
-                <IconButton
-                  color="primary"
-                  size="medium"
-                  className="app-logo-btn">
-                  <img
-                    className="app-logo-img"
-                    alt="iProcess"
-                    src={projectLogo}
-                  />
-                </IconButton>
-              </Link>
-              <Hidden smDown>
-                <Box className="app-logo-text">Vsoft</Box>
-              </Hidden>
-            </Box>
-          </Hidden>
           <Hidden mdDown>
             <Box className="d-flex align-items-center"></Box>
           </Hidden>
           <Box className="d-flex align-items-center">
-            <div>
-              {location.pathname === '/DashboardDefault' ? (
-                <>
-                  <Button
-                    onClick={doSave}
-                    type="default"
-                    size="small"
-                    style={{
-                      float: 'right',
-                      color: 'white',
-                      background: 'purple'
-                    }}
-                    variant="contained">
-                    Save
-                  </Button>
-                  <Button
-                    onClick={doCancel}
-                    type="default"
-                    size="small"
-                    style={{
-                      float: 'right',
-                      color: 'white',
-                      background: 'purple'
-                    }}
-                    variant="contained">
-                    Cancel
-                  </Button>
-                </>
-              ) : (
-                <></>
-              )}
-            </div>
           </Box>
         </Box>
       </AppBar>

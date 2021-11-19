@@ -9,7 +9,8 @@ import ReactFlow, {
   StepEdge,
   getOutgoers,
   getIncomers,
-  isEdge
+  isEdge,
+  ArrowHeadType
 } from 'react-flow-renderer';
 import {
   Dialog,
@@ -21,8 +22,7 @@ import {
 } from '@material-ui/core';
 import { useHistory, useLocation } from 'react-router-dom';
 import './styles.css';
-import FTP from './Ftp';
-import Email from './Email';
+
 import Sidebar from './Sidebar';
 import ArrowEdge from './ArrowEdge';
 import Form from 'react-jsonschema-form';
@@ -204,9 +204,8 @@ export default function App() {
           animated: false,
           sourceX: 10,
           sourceY: 10,
-          style: { stroke: 'red', strokeWidth: '2px', arrowHeadColor: 'red' },
-          arrowHeadType: 'arrowclosed',
-          type: 'step'
+          style: { stroke: 'red', strokeWidth: '2px' },
+          arrowHeadType: ArrowHeadType.ArrowClosed
         },
         els
       )
@@ -400,7 +399,10 @@ export default function App() {
         style={{
           float: 'right',
           color: 'white',
-          background: 'purple'
+          background: 'purple',
+          marginTop: '1px',
+          marginLeft: '2px',
+          marginRight: '2px'
         }}
         variant="contained">
         Save
@@ -412,7 +414,9 @@ export default function App() {
         style={{
           float: 'right',
           color: 'white',
-          background: 'purple'
+          background: 'purple',
+          marginTop: '1px',
+          marginLeft: '1px'
         }}
         variant="contained">
         Cancel

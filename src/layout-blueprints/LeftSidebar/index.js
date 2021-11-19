@@ -1,10 +1,9 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
-
 import { connect } from 'react-redux';
-
 import { Header, Footer } from '../../layout-components';
+import './boxes.css';
 
 const LeftSidebar = props => {
   const { children, footerFixed, contentBackground } = props;
@@ -18,9 +17,7 @@ const LeftSidebar = props => {
             className={clsx('app-content', {
               'app-content-footer-fixed': footerFixed
             })}>
-            <div className="app-content--inner">
               <div className="app-content--inner__wrapper">{children}</div>
-            </div>
             <Footer />
           </div>
         </div>

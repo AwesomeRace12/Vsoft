@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { Link } from 'react-router-dom';
 import './landing.css';
 
-import projectLogo from '../../assets/images/react.svg';
+import projectLogo from '../../assets/images/vsoft-final-01.png';
 import HeaderLandingPage from './HeaderLandingPage';
 
 const LandingPage = () => {
