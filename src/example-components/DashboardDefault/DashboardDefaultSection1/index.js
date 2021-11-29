@@ -375,16 +375,18 @@ export default function App() {
       if (isNode(elements[i])) {
         console.log(elements[i].id);
         var out = getOutgoers(elements[i], elements);
-        var outMap = out.map((n) => n.id);
+        var outMap = out.map(n => n.id);
         elements[i].child = outMap;
         console.log(elements[i].child);
         var parentIn = getIncomers(elements[i], elements);
-        var inMap = parentIn.map((n) => n.id);
+        var inMap = parentIn.map(n => n.id);
         elements[i].parent = inMap;
         console.log(elements[i].parent);
         if (
-          (i !== 0 && elements[i].parent.length > 0) &&
-          (i !== 1 && elements[i].child.length > 0)
+          i !== 0 &&
+          elements[i].parent.length > 0 &&
+          i !== 1 &&
+          elements[i].child.length > 0
         ) {
           setSaveValid(true);
         }
@@ -418,6 +420,15 @@ export default function App() {
   const formData = {
     description: thisElement.type
   };
+  const doUpload = e => {
+    const fileReader = new FileReader();
+    fileReader.readAsText(e.target.files[0], "UTF-8");
+    fileReader.onload = e => {
+      setElements([]);
+      const targetResult = JSON.parse(e.target.result);
+      setElements(targetResult);
+    };
+  };
 
   return (
     <>
@@ -450,6 +461,28 @@ export default function App() {
         variant="contained">
         Cancel
       </Button>
+      <input
+        type="file"
+        style={{ display: 'none'}}
+        id="contained-button-file"
+        onChange={doUpload}
+      />
+      <label htmlFor="contained-button-file" style={{float:'right'}}>
+        <Button
+          type="default"
+          size="small"
+          style={{
+            float: 'right',
+            color: 'white',
+            background: 'purple',
+            marginTop: '1px',
+            marginLeft: '1px'
+          }}
+          variant="contained"
+          component="span">
+          Upload
+        </Button>
+      </label>
       <div className="dndflow">
         <ReactFlowProvider>
           <Sidebar />
