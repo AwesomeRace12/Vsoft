@@ -26,9 +26,6 @@ import './styles.css';
 import Sidebar from './Sidebar';
 import ArrowEdge from './ArrowEdge';
 import Form from 'react-jsonschema-form';
-import { doSave } from '../../../layout-components/Header';
-
-const onConnect = params => console.log('handle onConnect', params);
 
 const initialElements = [
   {
